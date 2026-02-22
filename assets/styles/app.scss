@@ -1,3 +1,24 @@
+// 1. Abstracts
+@import "./abstracts/variables";
+
+
+// assets/styles/global.scss
+
+// customize some Bootstrap variables
+// $primary: red;
 
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
+
+// 2. Base
+@import "./base/typography";
+//@import "./base/classes";
+
+// 3. Components
+
+// 4. Layout
+
+// 5. Pages
+
+// 6. Thèmes
+@import "./themes/base_visitor";
