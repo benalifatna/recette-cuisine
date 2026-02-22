@@ -12,15 +12,16 @@
         <meta name="keywords" content="{% block keywords %}{% endblock %}">
         <meta name="author" content="Sophie Lemoine">
         <meta name="publisher" content="Fatna Benali">
-        <meta name="theme-color" content="#2cf9da">
+        <meta name="theme-color" content="#E63946">
 
         {# Favicon #}
-        <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-        <link rel="shortcut icon" href="/favicon.ico">
+                 
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="manifest" href="/site.webmanifest">
-
+        {# <link rel="shortcut icon" href="/favicon.ico"> #}
+        
         {# Google Font #}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,27 +70,27 @@
                     {% if app.user %}
                         {% if is_granted('ROLE_ADMIN') %}
                          <li class="nav-item">
-                            <a class="nav-link" href="{{path('app_admin_home')}}">Espace admin</a>
+                            {# <a class="nav-link" href="{{path('app_admin_home')}}">Espace admin</a> #}
                         </li>
                      {% endif %} 
 
                      
                         {% if is_granted('ROLE_USER') %}
                          <li class="nav-item">
-                            <a class="nav-link" href="{{path('app_user_home')}}">Espace privé</a>
+                            {# <a class="nav-link" href="{{path('app_user_home')}}">Espace privé</a> #}
                         </li>
                      {% endif %} 
 
                     
                          <li class="nav-item">
-                            <a class="nav-link" href="{{path('app_logout')}}">Déconnexion</a>
+                            {# <a class="nav-link" href="{{path('app_logout')}}">Déconnexion</a> #}
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{path('app_login')}}">Connexion</a>
+                            {# <a class="nav-link" href="{{path('app_login')}}">Connexion</a> #}
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{path('app_register')}}">Inscription</a>
+                            {# <a class="nav-link" href="{{path('app_register')}}">Inscription</a> #}
                         </li>
                         {% endif %}
                     </ul>
