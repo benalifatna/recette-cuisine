@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Connexion | Blog de recettes simples et rapides</title>
+
+               {# SEO #}
+        <meta name="robots" content="noindex, follow">
+        <meta name="description" content="Connectez-vous à votre compte pour accéder à vos recettes préférées, publier des commentaires, noter et partager vos likes sur nos recettes simples et rapides.">
+        <meta name="keywords" content="connexion blog cuisine, compte recettes, espace membre cuisine, recettes simples et rapides connexion">
+        <meta name="author" content="Sophie Lemoine">
+        <meta name="publisher" content="Fatna Benali">
+        <meta name="theme-color" content="#E63946">
+
+        {# Favicon #}
+        <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+        <link rel="shortcut icon" href="/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="manifest" href="/site.webmanifest">
+
+        {# Google Font #}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">        
+        
+        {# Webpack Encore #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+
+
+    </head>
+
+<body class="sl-auth-bg">
+    <main>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <img class="img-fluid" src="/images/statics/connexion-blog-sophie-lemoine.png" alt="Sophie Lemoine vous invite à vous connecter">
+                    </div>
+                    <div class="col-lg-6 d-flex flex-column gap-3 justify-content-center align-items-center my-4">
+                        <h1 class="text-center my-3">Connexion</h1>
+                        
+                    {# FORMULAIRE DE CONNEXION #}
+                    
+
+                    <form method="post" class="sl-auth-form">
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+
+                        {% if app.user %}
+                            <div class="mb-3">
+                                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ logout_path() }}">Logout</a>
+                            </div>
+                        {% endif %}
+                        <div class="mb-3">
+                            <label for="inputEmail">Email</label>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputPassword">Mot de passe</label>
+                            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                        </div>
+                        
+                        <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+
+                        <div class="mb-3">
+                            <label>
+                                <input type="checkbox" name="_remember_me"> Se souvenir de moi
+                            </label>
+                        </div>
+                        <div>
+                            <button class="btn btn-lg btn-primary w-100 shadow" type="submit">Se connecter</button>
+                        </div>
+                    </form>
+                     
+                     <div class="text-center">
+                            <p>Vous n'avez pas encore de compte? <a href="{{path('app_register')}}">Inscrivez-vous</a></p>
+                            <p><a href="{{path('app_visitor_welcome')}}">Retour à l'accueil</a></p>
+                     </div>
+                    </div>
+                     
+                </div>
+             </div>
+
+    </main>
+</body>
+</html>
+
+
+ 
