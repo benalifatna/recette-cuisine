@@ -57,7 +57,7 @@
 
                         {% if app.user %}
                             <div class="mb-3">
-                                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ logout_path() }}">Logout</a>
+                                Vous êtes identifié en tant que {{ app.user.userIdentifier }}, <a href="{{ logout_path() }}">Logout</a>
                             </div>
                         {% endif %}
                         <div class="mb-3">
@@ -72,9 +72,17 @@
                         <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
 
                         <div class="mb-3">
-                            <label>
-                                <input type="checkbox" name="_remember_me"> Se souvenir de moi
-                            </label>
+                            <div class="row">
+                                <div class="col-md-6 my-1">
+                                    <label>
+                                        <input type="checkbox" name="_remember_me"> Se souvenir de moi
+                                    </label>
+                                </div>
+                                <div class="col-md-6 my-1 text-md-end">
+                                    <a href="{{path('app_forgot_password_request')}}">Mot de passe oublié ?</a>
+                                </div>
+                            </div>
+                            
                         </div>
                         <div>
                             <button formnovalidate class="btn btn-lg btn-primary w-100 shadow" type="submit">Se connecter</button>
