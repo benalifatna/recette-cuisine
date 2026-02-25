@@ -38,7 +38,7 @@ security:
                 max_attempts: 3          # per minute ...
                 interval: '5 minutes' # ... or in a custom period
 
-            # user_checker: App\Security\UserChecker
+            user_checker: App\Security\UserChecker
 
             # Activate different ways to authenticate:
             # https://symfony.com/doc/current/security.html#the-firewall
