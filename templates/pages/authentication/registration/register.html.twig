@@ -98,67 +98,7 @@
                             <div class="mb-3">
                             <div class="text-danger">{{form_errors(registrationForm.agreeTerms)}}</div>
                                 {{form_widget(registrationForm.agreeTerms)}} 
-                                <label for="registration_form_agreeTerms">
-                                    Lire et accepter <a href="{{path('app_visitor_terms_of_service')}}" data-bs-toggle="modal" data-bs-target="#staticBackdrop" target="_blank">les conditions générales d'utilisation</a>
-                                </label>
-
-                                {# <!-- Modal -->
-                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-scrollable">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h2 class="modal-title fs-5" id="staticBackdropLabel">Les conditions générales d'utilisation</h2>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="cgu-container">
-
-                                                    <header>
-                                                        <p><strong>Dernière mise à jour :</strong> 17 mai 2025</p>
-                                                    </header>
-
-                                                    <section>
-                                                        <p>
-                                                        Les présentes Conditions Générales d'Utilisation (dites « CGU ») ont pour objet
-                                                        de définir les modalités et conditions dans lesquelles les utilisateurs accèdent
-                                                        et utilisent le site <strong>Le blog de Jean Dupont</strong> (ci-après « le Site »).
-                                                        </p>
-                                                        <p>
-                                                        Toute navigation sur le Site implique l'acceptation pleine et entière des présentes CGU.
-                                                        </p>
-                                                    </section>
-
-                                                    <section>
-                                                        <h2>1. Présentation du Site</h2>
-                                                        <p>
-                                                        Le Site est un blog médical ayant pour objectif de diffuser des informations claires,
-                                                        accessibles et pédagogiques sur la santé, la médecine et le bien-être.
-                                                        </p>
-                                                        <p>
-                                                        Il met en avant l'expertise du <strong>Dr Jean Dupont</strong> et s'adresse à un public non spécialisé.
-                                                        Les informations publiées ont une vocation <strong>informative et éducative</strong> uniquement.
-                                                        </p>
-                                                    </section>
-
-                                                   
-        
-
-
-       
-
-                                    
-
-                                             
-                                                 
-                                                    
-                                                
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> #}
+                                <label for="registration_form_agreeTerms">Lire et accepter <a href="{{path('app_visitor_terms_of_service')}}" target="_blank">les conditions générales d'utilisation</a></label>
                             </div>
                             <div>
                                 <input formnovalidate type="submit" class="btn btn-primary w-100 shadow" value="S'inscrire">

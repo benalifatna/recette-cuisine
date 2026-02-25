@@ -1,0 +1,38 @@
+
+{% extends 'themes/base_visitor.html.twig' %}
+
+{% block title %}Email de réinitialisation envoyé | Blog de recettes simples et rapides{% endblock %}
+
+{% block description %}
+    Un email de réinitialisation de mot de passe a été envoyé si un compte existe 
+    avec l'adresse renseignée. Consultez votre boîte mail pour continuer.
+{% endblock %}
+
+{% block keywords %}
+    réinitialisation mot de passe, blog cuisine connexion, 
+    recettes simples et rapides compte, récupération mot de passe
+{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Email envoyé</h1>
+    <div class="col-md-8 col-lg-5 mx-auto shadow p-4">
+    <p>
+        Si un compte correspondant à l'adresse email renseignée existe, 
+        un email contenant un lien de réinitialisation vient de vous être envoyé.
+    </p>
+
+    <p>
+        Ce lien expirera dans 
+        {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+    </p>
+
+    <p>
+        Si vous ne recevez pas d'email, pensez à vérifier votre dossier courrier indésirable (spam) 
+        ou <a href="{{ path('app_forgot_password_request') }}">réessayez</a>.
+    </p>
+
+    <p class="mt-4">
+        À très bientôt sur le blog de recettes simples et rapides 🍴
+    </p>
+    </div>
+{% endblock %}
