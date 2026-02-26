@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         {# SEO #}
-        <meta name="robots" content="index, follow">
+        {# <meta name="robots" content="index, follow"> #}
         <meta name="description" content="{% block description %}{% endblock %}">
         <meta name="keywords" content="{% block keywords %}{% endblock %}">
         <meta name="author" content="Sophie Lemoine">
@@ -41,7 +41,7 @@
 
     <body class="body-visitor">
         {# Navbar #}
-        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark shadow">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{path('app_visitor_welcome')}}">SL</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,50 +49,28 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                 {# Mettre à gauche #}
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{path('app_visitor_welcome')}}">Accueil</a>
+                        <a class="nav-link active" aria-current="page" href="{{path('app_user_home')}}">Tableau de bord</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="{{path('app_visitor_welcome')}}#about-me">Qui suis-je ?</a>
+                        <a class="nav-link" href="">Mon profil</a>
+                        </li>
+                         {% if is_granted('ROLE_ADMIN') %}
+                            <li class="nav-item">
+                            <a class="nav-link" href="{{path('app_admin_home')}}">Espace admin</a>
+                            </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{path('app_visitor_welcome')}}">Retour au site</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="{{path('app_visitor_blog_index')}}">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link" href="{{path('app_visitor_contact_index')}}">Contact</a>
+                            <a class="nav-link" href="{{path('app_logout')}}">Déconnexion</a>
                         </li>
                     </ul>
                     {# Mettre à droite #}
                     
-                    <ul class="navbar-nav ms-auto">
-                    {% if app.user %}
-                        {% if is_granted('ROLE_ADMIN') %}
-                         <li class="nav-item">
-                            <a class="nav-link" href="{{path('app_admin_home')}}">Espace admin</a>
-                        </li>
-                     {% endif %} 
-
-                     
-                        {% if is_granted('ROLE_USER') %}
-                         <li class="nav-item">
-                            <a class="nav-link" href="{{path('app_user_home')}}">Espace privé</a>
-                        </li>
-                     {% endif %} 
-
-                    
-                         <li class="nav-item">
-                            <a class="nav-link" href="{{path('app_logout')}}">Déconnexion</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{path('app_login')}}">Connexion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{path('app_register')}}">Inscription</a>
-                        </li>
-                        {% endif %}
-                    </ul>
+                   
                 </div>
             </div>
         </nav>
