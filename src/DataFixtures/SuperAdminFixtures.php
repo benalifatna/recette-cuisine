@@ -36,7 +36,7 @@ class SuperAdminFixtures extends Fixture
         $superAdmin->setEmail('sophie-lemoine@gmail.com');
         $superAdmin->setRoles(['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_USER']);
 
-        $passwordHashed = $this->hasher->hashPassword($superAdmin, 'Azerty123+*');
+        $passwordHashed = $this->hasher->hashPassword($superAdmin, 'Azerty1234+*');
         $superAdmin->setPassword("$passwordHashed");
 
         $superAdmin->setIsVerified(true);
