@@ -63,10 +63,10 @@ et autres types de recettes simples et rapides.
                         <td>{{category.updatedAt|format_date()}}</td>
                         <td class="d-flex justify-content-center align-items-center gap-1">
                             <a href="{{path('app_admin_category_edit', {'id':category.id})}}" class="btn btn-sm btn-secondary">Modifier</a>
-                            {# <form action="{{path('app_admin_category_delete', {'id':category.id})}}" method="post">
+                            <form action="{{path('app_admin_category_delete', {'id':category.id})}}" method="post">
                                 <input type="hidden" name="csrf_token" value="{{csrf_token('category-'~category.id)}}">
-                                <input type="submit" class="btn btn-sm btn-danger" value="Supprimer" onclick="return confirm('Confirmer ma suppression de cette catégorie?')">
-                            </form> #}
+                                <input type="submit" class="btn btn-sm btn-danger" value="Supprimer" onclick="return confirm('Confirmer la suppression de cette catégorie?')">
+                            </form>
                         </td>
                     </tr>
                 {% endfor %}

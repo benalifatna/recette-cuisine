@@ -76,4 +76,17 @@ final class CategoryController extends AbstractController
             'categoryForm' => $form->createView(),
         ]);
     }
+
+    #[Route('/category/{id<\d+>}/delete', name: 'app_admin_category_delete', methods: ['POST'])]
+    public function delete(Category $category, Request $request): Response
+    {
+        if ($this->isCsrfTokenValid("category-{$category->getId()}", $request->request->get('csrf_token'))) {
+            $this->entityManager->remove($category);
+            $this->entityManager->flush();
+
+            $this->addFlash('success', 'La catégorie a été supprimée');
+        }
+
+        return $this->redirectToRoute('app_admin_category_index');
+    }
 }
