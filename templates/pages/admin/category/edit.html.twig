@@ -1,0 +1,41 @@
+{% extends "themes/base_admin.html.twig" %}
+
+{% block title %}Modifier cette catégorie | Administration du blog de recettes{% endblock %}
+
+{% block description %}
+Modifier cette catégorie pour organiser les recettes du blog 
+(Entrées, Plats, Desserts, etc.) et améliorer la navigation des utilisateurs.
+{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">
+        Modifier cette catégorie de recettes
+    </h1>
+
+
+        <p class="text-center">
+            Utilisez ce formulaire pour modifier une catégorie 
+            afin de mieux structurer les recettes du blog.
+        </p>
+        
+        <div class="container">
+            <div class="row w-100">
+                <div class="col-md-8 col-lg-5 mx-auto">
+                    <div class="shadow p-4 bg-white rounded">
+                        {{ form_start(categoryForm) }}
+                            <div class="mb-3">
+                                <label for="category_form_name">Nom</label>
+                                <div class="text-danger">{{form_errors(categoryForm.name)}}</div>
+                                {{ form_widget(categoryForm.name, {'attr': {'class':'form-control', 'autofocus':'autofocus'}}) }}
+                            </div>
+                            <div>
+                                <input formnovalidate type="submit" class="btn btn-primary shadow" value="Enregistrer">
+                            </div>
+                        {{ form_end(categoryForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+  
+{% endblock %}

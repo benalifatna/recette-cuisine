@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="{% block block_name %}{% endblock %}">
+		<meta name="description" content="{% block description %}{% endblock %}">
 		<meta name="author" content="Sophie Lemoine">
 		<meta name="publisher" content="Fatna Benali">
         <meta name="theme-color" content="#E63946">
@@ -20,6 +20,11 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+
+        {% block j_query %}{% endblock %}
+
+		{% block data_tables %}{% endblock %}
+
 
         {# Font Awesome pour les icones#}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -197,7 +202,7 @@
 									</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link d-flex align-items-center gap-2 text-dark" href="#">
+									<a class="nav-link d-flex align-items-center gap-2 text-dark" href="{{path('app_admin_category_index')}}">
 										<i class="fa-solid fa-folder"></i>
 										Catégorie
 									</a>
