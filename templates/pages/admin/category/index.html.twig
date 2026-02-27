@@ -1,0 +1,24 @@
+{% extends "themes/base_admin.html.twig" %}
+
+{% block title %}Gestion des catégories de recettes | Administration{% endblock %}
+
+{% block description %}
+Consultez et gérez les catégories de recettes du blog : entrées, plats, desserts 
+et autres types de recettes simples et rapides.
+{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Liste des catégories de recettes</h1>
+
+    <p class="text-center">
+        Cette page permet d'administrer les différentes catégories du blog 
+        (Entrées, Plats, Desserts, etc.) afin d'organiser les recettes 
+        de manière claire et structurée.
+    </p>
+
+    {% include 'components/_alert.html.twig' %}
+
+    <div class="d-flex justify-content-end align-items-center">
+    <a href="{{path('app_admin_category_create')}}" class="btn btn-primary shadow"><i class="fa-solid fa-plus"></i> Nouvelle catégorie</a>
+    </div>
+{% endblock %}

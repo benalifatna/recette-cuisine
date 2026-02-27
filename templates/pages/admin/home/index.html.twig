@@ -1,9 +1,31 @@
 {% extends "themes/base_admin.html.twig" %}
 
-{% block title %}Tableau de bord{% endblock %}
+{% block title %}Tableau de bord | Administration du blog de recettes{% endblock %}
 
-{% block description %}Tableau de bord{% endblock %}
+{% block description %}
+Espace d'administration du blog de recettes simples et rapides. 
+Gérez les recettes, les catégories et les utilisateurs depuis votre tableau de bord.
+{% endblock %}
 
 {% block main %}
-    <h1 class="text-center my-3 display-5">Tableau de bord</h1>
+    <h1 class="text-center my-3 display-5">
+        Tableau de bord - Administration
+    </h1>
+
+    <div class="container mt-4">
+        <p class="text-center">
+            Bienvenue dans l'espace d'administration du blog de recettes simples et rapides.
+        </p>
+
+        <p class="text-center">
+            Depuis ce tableau de bord, vous pouvez :
+        </p>
+
+        <ul class="list-unstyled text-center">
+            <li>🍴 Gérer les recettes (ajouter, modifier, supprimer)</li>
+            <li>📂 Organiser les catégories (Entrées, Plats, Desserts)</li>
+            <li>👥 Administrer les comptes utilisateurs</li>
+            <li>💬 Modérer les commentaires</li>
+        </ul>
+    </div>
 {% endblock %}
