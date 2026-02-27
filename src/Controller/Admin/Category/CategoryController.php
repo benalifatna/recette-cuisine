@@ -14,10 +14,16 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin')]
 final class CategoryController extends AbstractController
 {
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly CategoryRepository $categoryRepository,
+    ) {
+    }
+
     #[Route('/category/list', name: 'app_admin_category_index', methods: ['GET'])]
-    public function index(CategoryRepository $categoryRepository): Response
+    public function index(): Response
     {
-        $categories = $categoryRepository->findAll();
+        $categories = $this->categoryRepository->findAll();
 
         return $this->render('pages/admin/category/index.html.twig', [
             'categories' => $categories,
@@ -25,7 +31,7 @@ final class CategoryController extends AbstractController
     }
 
     #[Route('/category/create', name: 'app_admin_category_create', methods: ['GET', 'POST'])]
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    public function create(Request $request): Response
     {
         $category = new Category();
 
@@ -36,8 +42,8 @@ final class CategoryController extends AbstractController
             $category->setCreatedAt(new \DateTimeImmutable());
             $category->setUpdatedAt(new \DateTimeImmutable());
 
-            $entityManager->persist($category);
-            $entityManager->flush();
+            $this->entityManager->persist($category);
+            $this->entityManager->flush();
 
             $this->addFlash('success', 'La catégorie a été ajoutée à la liste.');
 
@@ -45,6 +51,28 @@ final class CategoryController extends AbstractController
         }
 
         return $this->render('pages/admin/category/create.html.twig', [
+            'categoryForm' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/category/{id<\d+>}/edit', name: 'app_admin_category_edit', methods: ['GET', 'POST'])]
+    public function edit(Category $category, Request $request): Response
+    {
+        $form = $this->createForm(CategoryFormType::class, $category);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $category->setUpdatedAt(new \DateTimeImmutable());
+
+            $this->entityManager->persist($category);
+            $this->entityManager->flush();
+
+            $this->addFlash('success', 'La catégorie a été modifiée');
+
+            return $this->redirectToRoute('app_admin_category_index');
+        }
+
+        return $this->render('pages/admin/category/edit.html.twig', [
             'categoryForm' => $form->createView(),
         ]);
     }
