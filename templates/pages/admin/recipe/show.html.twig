@@ -1,0 +1,31 @@
+{% extends "themes/base_admin.html.twig" %}
+
+{% block title %}Lire l'article-{{ recipe.id }}: {{recipe.title}}{% endblock %}
+
+{% block description %}{{recipe.description}}{% endblock %}
+
+{% block main %}
+
+    <div class="container">
+        <div class="text-center">
+            {% if recipe.image %}
+                <img class="img-fluid" src="{{ vich_uploader_asset(recipe, 'imageFile') }}" alt="{{ recipe.title }}">
+            {% endif %}
+
+            <h1 class="text-center my-3 display-6">{{recipe.title}}</h1>
+
+            <div class="my-3">
+                <small>Créé le {{recipe.createdAt|format_date()}}</small> <br>
+                <small>Modifié le {{recipe.updatedAt|format_date()}}</small> <br>
+                {% if recipe.isPublished %}
+                <small>Publié le {{recipe.publishedAt|format_date()}}</small> <br>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="my-5">
+            {{recipe.content|raw}}
+        </div>
+    </div>
+
+{% endblock %}
