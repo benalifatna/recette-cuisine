@@ -1,0 +1,75 @@
+{% extends "themes/base_admin.html.twig" %}
+
+{% block title %}Créer une nouvelle recette | Administration du blog de recettes{% endblock %}
+
+{% block description %}
+Ajoutez une nouvelle recette pour organiser les recettes du blog 
+(Entrées, Plats, Desserts, etc.) et améliorer la navigation des utilisateurs.
+{% endblock %}
+
+{% block tiny_mce %}
+    <script src="https://cdn.tiny.cloud/1/xcc280jrjj1yg308b36ikqxwzvvk420yzcvig7pq9e2f3lmq/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea'
+        });
+    </script>
+{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">
+        Créer une nouvelle recette de cuisine
+    </h1>
+
+
+        <p class="text-center">
+            Utilisez ce formulaire pour ajouter une nouvelle recette 
+            afin d'alimenter le blog.
+        </p>
+        
+        <div class="container">
+            <div class="row w-100">
+                <div class="col-md-10 col-lg-5 mx-auto bg-light shadow p-4">
+                    {# <div class="shadow p-4 bg-white rounded"> #}
+                        {{ form_start(recipeForm) }}
+                            <div class="mb-3">
+                                <label for="recipe_form_title">Titre <span class="text-danger">*</span></label>
+                                <div class="text-danger">{{form_errors(recipeForm.title)}}</div>
+                                {{ form_widget(recipeForm.title, {'attr': {'class':'form-control', 'autofocus':'autofocus'}}) }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipe_form_category">Catégorie <span class="text-danger">*</span></label>
+                                <div class="text-danger">{{form_errors(recipeForm.category)}}</div>
+                                {{ form_widget(recipeForm.category, {'attr': {'class':'form-control'}}) }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipe_form_description">Description <span class="text-danger">*</span></label>
+                                <div class="text-danger">{{form_errors(recipeForm.description)}}</div>
+                                {{ form_widget(recipeForm.description, {'attr': {'class':'form-control'}}) }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="post_form_keywords">Mots clés</label>
+                                <div class="text-danger">{{form_errors(recipeForm.keywords)}}</div>
+                                {{form_widget(recipeForm.keywords, {'attr': {'class':'form-control'}})}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="post_form_imageFile">Image <span class="text-danger">*</span></label>
+                                <div class="text-danger">{{form_errors(recipeForm.imageFile)}}</div>
+                                {{form_widget(recipeForm.imageFile, {'attr': {'class':'form-control'}})}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="post_form_content">Contenu</label>
+                                <div class="text-danger">{{form_errors(recipeForm.content)}}</div>
+                                {{form_widget(recipeForm.content, {'attr': {'class':'form-control', 'rows':10}})}}
+                            </div>
+                            <div>
+                                <input formnovalidate type="submit" class="btn btn-primary shadow" value="Enregistrer">
+                            </div>
+                        {{ form_end(recipeForm) }}
+                    {# </div> #}
+                </div>
+            </div>
+        </div>
+            
+  
+{% endblock %}
