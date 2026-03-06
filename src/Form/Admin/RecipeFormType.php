@@ -27,12 +27,15 @@ class RecipeFormType extends AbstractType
             ->add('description', TextType::class)
             ->add('keywords', TextType::class)
             ->add('imageFile', VichImageType::class, [
-                'required' => true,
+                // 'required' => true,
+                'required' => false,
 
-                'allow_delete' => true,
+                // 'allow_delete' => true,
+                'allow_delete' => false,
                 'delete_label' => 'Supprimer l\'image actuelle?',
                 // pour télécharger l'image
-                'download_label' => false,
+                // 'download_label' => false,
+                'download_label' => true,
                 'download_uri' => false,
 
                 'image_uri' => false,

@@ -1,6 +1,6 @@
 {% extends "themes/base_admin.html.twig" %}
 
-{% block title %}Lire l'article-{{ recipe.id }}: {{recipe.title}}{% endblock %}
+{% block title %}Lire la recette -{{ recipe.id }}: {{recipe.title}}{% endblock %}
 
 {% block description %}{{recipe.description}}{% endblock %}
 
@@ -8,9 +8,9 @@
 
     <div class="container">
         <div class="text-center">
-            {% if recipe.image %}
+            {# {% if recipe.image %} #}
                 <img class="img-fluid" src="{{ vich_uploader_asset(recipe, 'imageFile') }}" alt="{{ recipe.title }}">
-            {% endif %}
+            {# {% endif %} #}
 
             <h1 class="text-center my-3 display-6">{{recipe.title}}</h1>
 
@@ -24,6 +24,7 @@
         </div>
 
         <div class="my-5">
+        {# raw pour filtrer < fgdf> #}
             {{recipe.content|raw}}
         </div>
     </div>

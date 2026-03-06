@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Vich\UploaderBundle\Mapping\Attribute as Vich;
 
 #[Vich\Uploadable]
@@ -61,7 +62,7 @@ class Recipe
     #[ORM\Column]
     private ?bool $isPublished = false;
 
-    #[Assert\NotBlank(message: "L'image est obligatoire.")]
+    #[Assert\NotBlank(message: "L'image est obligatoire.", allowNull: true)]
     #[Assert\File(
         maxSize: '4M',
         extensions: ['png', 'jpeg', 'jpg', 'webp'],
@@ -206,11 +207,22 @@ class Recipe
         return $this->image;
     }
 
-    public function setImage(string $image): static
+    // public function setImage(string $image): static
+    public function setImage(?string $image): static
     {
         $this->image = $image;
 
         return $this;
+    }
+
+    #[Assert\Callback]
+    public function validateImage(ExecutionContextInterface $context): void
+    {
+        if (!$this->image && !$this->imageFile) {
+            $context->buildViolation("L'image est obligatoire.")
+                ->atPath('imageFile')
+                ->addViolation();
+        }
     }
 
     public function getContent(): ?string
