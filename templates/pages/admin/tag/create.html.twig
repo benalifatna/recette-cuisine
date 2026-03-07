@@ -1,0 +1,41 @@
+{% extends "themes/base_admin.html.twig" %}
+
+{% block title %}Créer un nouveau Tag | Administration du blog de recettes{% endblock %}
+
+{% block description %}
+Ajoutez un nouveau Tag pour organiser les recettes du blog 
+(rapide, facile, végétarien, économique, sans gluten etc.) et améliorer la navigation des utilisateurs.
+{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">
+        Créer un nouveau Tag de recettes
+    </h1>
+
+
+        <p class="text-center">
+            Utilisez ce formulaire pour ajouter un nouveau Tag 
+            afin de structurer les recettes du blog.
+        </p>
+        
+        <div class="container">
+            <div class="row w-100">
+                <div class="col-md-8 col-lg-5 mx-auto">
+                    <div class="shadow p-4 bg-white rounded">
+                        {{ form_start(tagForm) }}
+                            <div class="mb-3">
+                                <label for="tag_form_name">Nom</label>
+                                <div class="text-danger">{{form_errors(tagForm.name)}}</div>
+                                {{ form_widget(tagForm.name, {'attr': {'class':'form-control', 'autofocus':'autofocus'}}) }}
+                            </div>
+                            <div>
+                                <input formnovalidate type="submit" class="btn btn-primary shadow" value="Enregistrer">
+                            </div>
+                        {{ form_end(tagForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+  
+{% endblock %}
