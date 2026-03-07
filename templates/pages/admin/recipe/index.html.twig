@@ -97,17 +97,6 @@ et autres types de recettes simples et rapides.
                                 </form>
                             </div>
                         </td>
-                        {# <td>{{recipe.name}}</td>
-                        <td>{{recipe.slug}}</td>
-                        <td>{{recipe.createdAt|format_date()}}</td>
-                        <td>{{recipe.updatedAt|format_date()}}</td>
-                        <td class="d-flex justify-content-center align-items-center gap-1">
-                            <a href="{{path('app_admin_category_edit', {'id':recipe.id})}}" class="btn btn-sm btn-secondary">Modifier</a>
-                            <form action="{{path('app_admin_category_delete', {'id':recipe.id})}}" method="recipe">
-                                <input type="hidden" name="csrf_token" value="{{csrf_token('recipe-'~recipe.id)}}">
-                                <input type="submit" class="btn btn-sm btn-danger" value="Supprimer" onclick="return confirm('Confirmer la suppression de cette catégorie?')">
-                            </form>
-                        </td> #}
                     </tr>
                 {% endfor %}
             </tbody>
