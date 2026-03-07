@@ -63,10 +63,10 @@ et d'améliorer la recherche des utilisateurs.
                         <td>{{tag.updatedAt|format_date()}}</td>
                         <td class="d-flex justify-content-center align-items-center gap-1">
                             <a href="{{path('app_admin_tag_edit', {'id':tag.id})}}" class="btn btn-sm btn-secondary">Modifier</a>
-                            {# <form action="{{path('app_admin_tag_delete', {'id':tag.id})}}" method="post">
-                                <input type="hidden" name="csrf_token" value="{{csrf_token('tag-'~tag.id)}}">
+                            <form action="{{path('app_admin_tag_delete', {'id':tag.id})}}" method="post">
+                                <input type="hidden" name="csrf_token" value="{{csrf_token('delete-tag-'~tag.id)}}">
                                 <input type="submit" class="btn btn-sm btn-danger" value="Supprimer" onclick="return confirm('Confirmer la suppression de ce Tag?')">
-                            </form> #}
+                            </form>
                         </td>
                     </tr>
                 {% endfor %}
