@@ -4,6 +4,7 @@ namespace App\Form\Admin;
 
 use App\Entity\Category;
 use App\Entity\Recipe;
+use App\Entity\Tag;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -23,6 +24,12 @@ class RecipeFormType extends AbstractType
                 'class' => Category::class,
                 'choice_label' => 'name',
                 'placeholder' => 'Sélectionner une catégorie',
+            ])
+            ->add('tags', EntityType::class, [
+                'class' => Tag::class,
+                'choice_label' => 'name',
+                'expanded' => false,
+                'multiple' => true,
             ])
             ->add('description', TextType::class)
             ->add('keywords', TextType::class)
