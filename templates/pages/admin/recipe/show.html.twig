@@ -24,6 +24,18 @@
         </div>
 
         <div class="my-5">
+
+            <p>La catégorie: <span class="badge text-bg-primary">{{recipe.category.name}}</span></p>
+
+                {% if recipe.tags is not empty %}
+                    <p>
+                        Les tags: 
+                        {% for tag in recipe.tags %}
+                            <span class="badge text-bg-secondary">{{tag.name}}</span> 
+                        {% endfor %}
+                    </p>
+                {% endif %}
+
         {# raw pour filtrer < fgdf> #}
             {{recipe.content|raw}}
         </div>
