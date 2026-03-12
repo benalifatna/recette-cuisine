@@ -63,10 +63,10 @@ et d'améliorer la recherche des utilisateurs.
                         <td>{{ingredient.updatedAt|format_date()}}</td>
                         <td class="d-flex justify-content-center align-items-center gap-1">
                              <a href="{{path('app_admin_ingredient_edit', {'id':ingredient.id})}}" class="btn btn-sm btn-secondary">Modifier</a>
-                           {# <form action="{{path('app_admin_ingredient_delete', {'id':ingredient.id})}}" method="post">
+                           <form action="{{path('app_admin_ingredient_delete', {'id':ingredient.id})}}" method="post">
                                 <input type="hidden" name="csrf_token" value="{{csrf_token('delete-ingredient-'~ingredient.id)}}">
                                 <input type="submit" class="btn btn-sm btn-danger" value="Supprimer" onclick="return confirm('Confirmer la suppression de cet ingredient?')">
-                            </form> #}
+                            </form>
                         </td>
                     </tr>
                 {% endfor %}
