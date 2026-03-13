@@ -3,6 +3,7 @@
 namespace App\Form\Admin;
 
 use App\Entity\Category;
+use App\Entity\Ingredient;
 use App\Entity\Recipe;
 use App\Entity\Tag;
 use App\Entity\User;
@@ -27,6 +28,12 @@ class RecipeFormType extends AbstractType
             ])
             ->add('tags', EntityType::class, [
                 'class' => Tag::class,
+                'choice_label' => 'name',
+                'expanded' => false,
+                'multiple' => true,
+            ])
+            ->add('ingredients', EntityType::class, [
+                'class' => Ingredient::class,
                 'choice_label' => 'name',
                 'expanded' => false,
                 'multiple' => true,

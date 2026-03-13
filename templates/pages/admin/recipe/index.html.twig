@@ -46,6 +46,7 @@ et autres types de recettes simples et rapides.
                     <th>Titre</th>
                     <th>Catégorie</th>
                     <th>Tags</th>
+                    <th>Ingrédients</th>
                     <th>Statut</th>
                     <th>Contenu</th>
                     <th>Crée le</th>
@@ -67,6 +68,15 @@ et autres types de recettes simples et rapides.
                             {% if recipe.tags is not empty %}
                                 {% for tag in recipe.tags %}
                                     <span class="badge text-bg-secondary">{{tag.name}}</span> 
+                                {% endfor %}
+                            {% else %}
+                                    <p class="text-center">---</p>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            {% if recipe.ingredients is not empty %}
+                                {% for ingredient in recipe.ingredients %}
+                                    <span class="badge text-bg-secondary">{{ingredient.name}}</span> 
                                 {% endfor %}
                             {% else %}
                                     <p class="text-center">---</p>
