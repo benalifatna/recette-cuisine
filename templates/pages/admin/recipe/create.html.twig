@@ -29,6 +29,13 @@ Ajoutez une nouvelle recette pour organiser les recettes du blog
         $('#recipe_form_tags').select2();
     });
 </script>
+<script>
+// quand on charge la page on a une fonction anonyme
+    $(document).ready(function() {
+        // on cherche dans la page, l'élement qui possède l'identifiant recipe_form_ingredients qui provient du fichier select2
+        $('#recipe_form_ingredients').select2();
+    });
+</script>
 {% endblock %}
 
 {% block main %}
@@ -61,6 +68,11 @@ Ajoutez une nouvelle recette pour organiser les recettes du blog
                                 <label for="recipe_form_tags">Tags</label>
                                 <div class="text-danger">{{form_errors(recipeForm.tags)}}</div>
                                 {{ form_widget(recipeForm.tags, {'attr': {'class':'form-control'}}) }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipe_form_ingredients">Ingrédients</label>
+                                <div class="text-danger">{{form_errors(recipeForm.ingredients)}}</div>
+                                {{ form_widget(recipeForm.ingredients, {'attr': {'class':'form-control'}}) }}
                             </div>
                             <div class="mb-3">
                                 <label for="recipe_form_description">Description <span class="text-danger">*</span></label>
