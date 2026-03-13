@@ -35,6 +35,14 @@
                         {% endfor %}
                     </p>
                 {% endif %}
+                {% if recipe.ingredients is not empty %}
+                    <p>
+                        Les ingrédients: 
+                        {% for ingredient in recipe.ingredients %}
+                            <span class="badge text-bg-secondary">{{ingredient.name}}</span> 
+                        {% endfor %}
+                    </p>
+                {% endif %}
 
         {# raw pour filtrer < fgdf> #}
             {{recipe.content|raw}}
