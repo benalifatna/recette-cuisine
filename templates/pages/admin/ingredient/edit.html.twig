@@ -1,0 +1,41 @@
+{% extends "themes/base_admin.html.twig" %}
+
+{% block title %}Modifier l'ingrédient- {{ ingredient.id }}: {{ingredient.name}} | Administration du blog de recettes{% endblock %}
+
+{% block description %}
+Modifiez l'ingrédient afin d'améliorer l'organisation et la classification
+des recettes du blog (ex : poulet, riz, tomate, chocolat, etc...) et améliorer la navigation des utilisateurs.
+{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">
+        Modifier cet ingrédient de la liste
+    </h1>
+
+
+        <p class="text-center">
+           Les ingrédients permettent d'ajouter des mots-clés aux recettes
+        afin d'améliorer la recherche et la navigation des utilisateurs.
+        </p>
+        
+        <div class="container">
+            <div class="row w-100">
+                <div class="col-md-8 col-lg-5 mx-auto">
+                    <div class="shadow p-4 bg-white rounded">
+                        {{ form_start(ingredientForm) }}
+                            <div class="mb-3">
+                                <label for="ingredient_form_name">Nom</label>
+                                <div class="text-danger">{{form_errors(ingredientForm.name)}}</div>
+                                {{ form_widget(ingredientForm.name, {'attr': {'class':'form-control', 'autofocus':'autofocus'}}) }}
+                            </div>
+                            <div>
+                                <input formnovalidate type="submit" class="btn btn-primary shadow" value="Enregistrer">
+                            </div>
+                        {{ form_end(ingredientForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+  
+{% endblock %}

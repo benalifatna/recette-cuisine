@@ -1,0 +1,44 @@
+{% extends "themes/base_admin.html.twig" %}
+
+{% block title %}Créer un nouvel ingredient | Administration du blog de recettes{% endblock %}
+
+{% block description %}
+Ajoutez un nouvel ingrédient afin de permettre aux utilisateurs
+de rechercher des recettes en fonction des ingrédients disponibles
+(par exemple : poulet, tomate, fromage, chocolat, etc.) et améliorer la navigation des utilisateurs.
+{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">
+        Créer un nouvel ingrédient
+    </h1>
+
+
+        <p class="text-center">
+            Utilisez ce formulaire pour ajouter un nouvel Ingredient. 
+            Les ingrédients permettent d'améliorer la recherche des recettes.
+            Les utilisateurs pourront filtrer les recettes selon les ingrédients
+            qu'ils possèdent (ex : poulet, riz, tomate, chocolat, etc.).
+        </p>
+        
+        <div class="container">
+            <div class="row w-100">
+                <div class="col-md-8 col-lg-5 mx-auto">
+                    <div class="shadow p-4 bg-white rounded">
+                        {{ form_start(ingredientForm) }}
+                            <div class="mb-3">
+                                <label for="tag_form_name">Nom</label>
+                                <div class="text-danger">{{form_errors(ingredientForm.name)}}</div>
+                                {{ form_widget(ingredientForm.name, {'attr': {'class':'form-control', 'autofocus':'autofocus'}}) }}
+                            </div>
+                            <div>
+                                <input formnovalidate type="submit" class="btn btn-primary shadow" value="Enregistrer">
+                            </div>
+                        {{ form_end(ingredientForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+  
+{% endblock %}
