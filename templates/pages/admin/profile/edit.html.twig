@@ -1,0 +1,47 @@
+{% extends "themes/base_admin.html.twig" %}
+
+{% block title %}Modifier mon profil | Administration{% endblock %}
+
+{% block description %}
+Modifiez les informations de votre profil administrateur : prénom, nom et adresse email ainsi que le mot de passe.
+Ces informations sont utilisées pour gérer votre compte et administrer le blog de recettes.
+{% endblock %}
+
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Modification du profil</h1>
+
+    <p class="text-center">
+        Utilisez ce formulaire pour mettre à jour vos informations personnelles.
+        Ces informations permettent d'identifier l'administrateur du blog et de sécuriser l'accès à l'espace d'administration.
+    </p>
+
+    {% include 'components/_alert.html.twig' %}
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-10 col-lg-5 mx-auto p-4 shadow">
+                {{form_start(profileForm)}}
+                    <div class="mb-3">
+                        <label for="profile_form_firstName">Prénom</label>
+                        {{form_widget(profileForm.firstName, {'attr': {'class':'form-control', 'autofocus': 'autofocus'}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label for="profile_form_lastName">Nom</label>
+                        {{form_widget(profileForm.lastName, {'attr': {'class':'form-control'}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label for="profile_form_email">Email</label>
+                        {{form_widget(profileForm.email, {'attr': {'class':'form-control'}})}}
+                    </div>
+                    <div>
+                        <input formnovalidate type="submit" class="btn btn-primary shadow w-100" value="Modifier">
+                    </div>
+                {{form_end(profileForm)}}
+            </div>
+        
+        </div>
+    
+    </div>
+
+{% endblock %}
