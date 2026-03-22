@@ -1,0 +1,46 @@
+{% extends "themes/base_admin.html.twig" %}
+
+{% block title %}Modification du Paramètres du site | Administration{% endblock %}
+
+{% block description %}
+    Modifiez les paramètres généraux du blog de recettes : nom de l'Administrateur, prénom,
+    email de contact, téléphone et autres informations utiles pour personnaliser l'affichage et le fonctionnement du site.
+{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Les paramètres du site </h1>
+
+    <p class="text-center">
+        Cette page permet de configurer les informations générales du blog de recettes :
+        Nom du contact du site, Email, téléphone, nom du site, description, email de contact et autres paramètres essentiels.
+    </p>
+
+    {% include 'components/_alert.html.twig' %}
+
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-10 col-lg-5 mx-auto p-4 shadow">
+                    {{form_start(settingForm)}}
+                    <div class="mb-3">
+                        <label for="setting_form_email">Email</label>
+                        <div class="text-danger">{{form_errors(settingForm.email)}}</div>
+                        {{form_widget(settingForm.email, {'attr': {'class':'form-control', 'autofocus':'autofocus'}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label for="setting_form_phone">Numéro de téléphone</label>
+                        <div class="text-danger">{{form_errors(settingForm.phone)}}</div>
+                        {{form_widget(settingForm.phone, {'attr': {'class':'form-control'}})}}
+                    </div>
+                    <div>
+                        <input formnovalidate type="submit" class="btn btn-primary shadow w-100" value="Modifier">
+                    </div>
+                     {# <div>
+                            <a href="{{path('app_admin_setting_edit', {'id':setting.id})}}" class="btn btn-sm btn-secondary w-100">Modifier les paramètres</a>
+                        </div> #}
+                {{form_end(settingForm)}}
+                    
+                </div>
+            </div>
+        </div>
+    
+{% endblock %}

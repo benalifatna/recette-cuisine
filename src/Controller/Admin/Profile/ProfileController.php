@@ -21,7 +21,7 @@ final class ProfileController extends AbstractController
     ) {
     }
 
-    #[Route('/profile/index', name: 'app_admin_profile_index', methods: ['GET'])]
+    #[Route('/profile', name: 'app_admin_profile_index', methods: ['GET'])]
     public function index(): Response
     {
         // $admin = $this->getUser();
