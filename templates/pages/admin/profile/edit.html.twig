@@ -24,14 +24,17 @@ Ces informations sont utilisées pour gérer votre compte et administrer le blog
                 {{form_start(profileForm)}}
                     <div class="mb-3">
                         <label for="profile_form_firstName">Prénom</label>
+                        <div class="text-danger">{{form_errors(profileForm.firstName)}}</div>
                         {{form_widget(profileForm.firstName, {'attr': {'class':'form-control', 'autofocus': 'autofocus'}})}}
                     </div>
                     <div class="mb-3">
                         <label for="profile_form_lastName">Nom</label>
+                        <div class="text-danger">{{form_errors(profileForm.lastName)}}</div>
                         {{form_widget(profileForm.lastName, {'attr': {'class':'form-control'}})}}
                     </div>
                     <div class="mb-3">
                         <label for="profile_form_email">Email</label>
+                        <div class="text-danger">{{form_errors(profileForm.email)}}</div>
                         {{form_widget(profileForm.email, {'attr': {'class':'form-control'}})}}
                     </div>
                     <div>
