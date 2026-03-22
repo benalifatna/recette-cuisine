@@ -15,3 +15,4 @@ parameters:
         - '#Property App\\Entity\\Recipe::\$isPublished \(bool\|null\) is never assigned null so it can be removed from the property type#'
         - '#Property App\\Entity\\Tag::\$id \(int\|null\) is never assigned int so it can be removed from the property type#'
         - '#Property App\\Entity\\Ingredient::\$id \(int\|null\) is never assigned int so it can be removed from the property type#'
+        - '#Property App\\Entity\\Setting::\$id \(int\|null\) is never assigned int so it can be removed from the property type#'

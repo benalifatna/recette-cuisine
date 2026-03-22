@@ -1,0 +1,37 @@
+{% extends "themes/base_admin.html.twig" %}
+
+{% block title %}Paramètres du site | Administration{% endblock %}
+
+{% block description %}
+Gérez les paramètres généraux du blog de recettes : nom de l'Administrateur, description,
+email de contact, téléphone logo et autres informations utiles pour personnaliser
+l'affichage et le fonctionnement du site.
+{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Les paramètres du site </h1>
+
+    <p class="text-center">
+        Cette page permet de configurer les informations générales du blog de recettes :
+        Nom du contact du site, Email, téléphone, nom du site, description, email de contact et autres paramètres essentiels.
+    </p>
+
+    {% include 'components/_alert.html.twig' %}
+
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-10 col-lg-5 mx-auto p-4 shadow">
+                    <div>
+                        <p><strong>Prénom</strong>: {{app.user.firstName}}</p>
+                        <p><strong>Nom</strong>: {{app.user.lastName}}</p>
+                        <p><strong>Email</strong>: {{setting.email}}</p>
+                        <p><strong>Téléphone</strong>: {{setting.phone}}</p>
+                        <div>
+                            <a href="{{path('app_admin_setting_edit', {'id':setting.id})}}" class="btn btn-sm btn-secondary w-100">Modifier les paramètres</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+{% endblock %}
