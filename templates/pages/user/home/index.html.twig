@@ -5,5 +5,5 @@
 {% block description %}Tableau de bord{% endblock %}
 
 {% block main %}
-    <h1 class="text-center my-3 display-5">Hello User</h1>
+    <h1 class="text-center my-3 display-5">Hello {{app.user.firstName}} {{app.user.lastName}}</h1>
 {% endblock %}
