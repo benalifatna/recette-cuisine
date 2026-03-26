@@ -13,10 +13,10 @@
 {% endblock %}
 
 {% block main %}
-    <h1 class="text-center my-3 display-5">
+    {# <h1 class="text-center my-3 display-5">
         Toutes nos recettes simples et rapides
-    </h1>
-
+    </h1> #}
+    {% include 'components/visitor/_header_visitor.html.twig' with {'h1': "Toutes nos recettes simples et rapides"} %}
     <p class="text-center">
         🍴 Découvrez l'ensemble des recettes du blog : des idées faciles et gourmandes 
         pour cuisiner rapidement au quotidien.

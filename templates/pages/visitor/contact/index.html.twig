@@ -12,14 +12,71 @@
     Sophie Lemoine contact, collaboration cuisine
 {% endblock %}
 
+{% block font_awesome %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+       
+{% endblock %}
+
 {% block main %}
-    <h1 class="text-center my-3 display-5">
+    {# <h1 class="text-center my-3 display-5">
         Contactez-moi
-    </h1>
+    </h1> #}
+
+    {% include 'components/visitor/_header_visitor.html.twig' with {'h1': "Contactez-moi"} %}
 
     <p class="text-center">
         Une question sur une recette ? Une suggestion ou une demande de collaboration ? 
         N'hésitez pas à me contacter, je vous répondrai avec plaisir.
     </p>
+    
+    
+    <div class="container my-5">
+        <div class="row gap-contact-visitor">
+            <div class="col-lg-6">
+                {% include 'components/_alert.html.twig' %}
+                {{form_start(contactForm)}}
+                    <div class="row">
+                        <div class="col-lg-6 mb-3">
+                            <label for="registration_form_firstName">Prénom <span class="text-danger">*</span></label>
+                            <div class="text-danger">{{form_errors(contactForm.firstName)}}</div>
+                            {{form_widget(contactForm.firstName, {'attr': {'class':'form-control', 'autofocus': 'autofocus'}})}}
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <label for="registration_form_lastName">Nom <span class="text-danger">*</span></label>
+                            <div class="text-danger">{{form_errors(contactForm.lastName)}}</div>
+                            {{form_widget(contactForm.lastName, {'attr': {'class':'form-control'}})}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 mb-3">
+                            <label for="registration_form_email">Email <span class="text-danger">*</span></label>
+                            <div class="text-danger">{{form_errors(contactForm.email)}}</div>
+                            {{form_widget(contactForm.email, {'attr': {'class':'form-control'}})}}
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <label for="registration_form_phone">Numéro de téléphone</label>
+                            <div class="text-danger">{{form_errors(contactForm.phone)}}</div>
+                            {{form_widget(contactForm.phone, {'attr': {'class':'form-control'}})}}
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="registration_form_message">Message <span class="text-danger">*</span></label>
+                        <div class="text-danger">{{form_errors(contactForm.message)}}</div>
+                        {{form_widget(contactForm.message, {'attr': {'class':'form-control', 'rows': 6}})}}
+                    </div>
+                    <div>
+                        <input formnovalidate type="submit" class="btn btn-secondary w-100 shadow">
+                    </div>
+                {{form_end(contactForm)}}
+            </div>
+            <div class="col-lg-6">
+                <div class="d-flex flex-column justify-content-center align-items-start">
+                    <p><strong><i class="fa-solid fa-envelope"></i></strong>: <a class="text-decoration-none text-dark" href="mailto:{{setting.email}}">{{setting.email}}</a></p>
+                    <p><strong><i class="fa-solid fa-phone"></i></strong>: <a class="text-decoration-none text-dark" href="tel:{{setting.phone}}">{{setting.phone}}</a></p>
+                    <iframe class="w-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.18279825137!2d2.2950274999999993!3d48.8737917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fec70fb1d8f%3A0xd9b5676e112e643d!2sArc%20de%20Triomphe!5e0!3m2!1sfr!2sfr!4v1771944227269!5m2!1sfr!2sfr" style="border:0; height:300px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 

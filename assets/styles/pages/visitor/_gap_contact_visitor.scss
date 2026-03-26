@@ -1,0 +1,9 @@
+.gap-contact-visitor {
+    gap: 3rem;
+}
+
+@media screen and (min-width:992px) {
+    .gap-contact-visitor {
+        gap: 0rem;
+    }
+}
