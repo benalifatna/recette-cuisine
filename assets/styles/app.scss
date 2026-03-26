@@ -15,10 +15,13 @@
 @import "./base/classes";
 
 // 3. Components
+@import "./components/visitor/header_visitor";
 @import "./components/auth-form";
+
 // 4. Layout
 
 // 5. Pages
+@import "./pages/visitor/gap_contact_visitor";
 
 // 6. Thèmes
-@import "./themes/base_visitor";
+@import "./themes/base_visitor.scss";
