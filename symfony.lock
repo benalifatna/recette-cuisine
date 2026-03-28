@@ -59,6 +59,12 @@
             "./.php-cs-fixer.dist.php"
         ]
     },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v6.10.0"
+    },
+    "knplabs/knp-time-bundle": {
+        "version": "2.5.0"
+    },
     "liip/imagine-bundle": {
         "version": "2.17",
         "recipe": {
