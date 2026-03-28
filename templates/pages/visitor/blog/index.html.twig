@@ -8,8 +8,9 @@
 {% endblock %}
 
 {% block keywords %}
-    recettes simples, recettes rapides, idées repas faciles, cuisine maison, 
-    recettes familiales, liste recettes, blog cuisine facile
+    <meta name="keywords" content="recettes simples, recettes rapides, idées repas faciles, cuisine maison, 
+    recettes familiales, liste recettes, blog cuisine facile">
+
 {% endblock %}
 
 {# pour la pagination #}
@@ -98,7 +99,7 @@
 											</p>
 											{% endif %}
 											<p class="card-text"><small class="text-body-secondary">Publié {{recipe.publishedAt|ago}}</small></p>
-											<a href="" class="btn btn-primary shadow">Lire la recette</a>
+											<a href="{{path('app_visitor_blog_recipe_show', {'id':recipe.id, 'slug':recipe.slug})}}" class="btn btn-primary shadow">Lire la recette</a>
 										</div>
 									</div>
 								</div>

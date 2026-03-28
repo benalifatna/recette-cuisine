@@ -9,7 +9,9 @@
         {# SEO #}
         <meta name="robots" content="index, follow">
         <meta name="description" content="{% block description %}{% endblock %}">
-        <meta name="keywords" content="{% block keywords %}{% endblock %}">
+        
+        {% block keywords %}{% endblock %}
+        
         <meta name="author" content="Sophie Lemoine">
         <meta name="publisher" content="Fatna Benali">
         <meta name="theme-color" content="#E63946">

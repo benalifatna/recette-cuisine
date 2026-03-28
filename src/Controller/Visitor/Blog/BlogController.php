@@ -3,6 +3,7 @@
 namespace App\Controller\Visitor\Blog;
 
 use App\Entity\Category;
+use App\Entity\Recipe;
 use App\Entity\Tag;
 use App\Repository\CategoryRepository;
 use App\Repository\RecipeRepository;
@@ -80,6 +81,48 @@ final class BlogController extends AbstractController
             'categories' => $categories,
             'tags' => $tags,
             'recipes' => $recipes,
+        ]);
+    }
+
+    #[Route('/blog/recette/{id<\d+>}/{slug}', name: 'app_visitor_blog_recipe_show', methods: ['GET', 'POST'])]
+    // public function showRecipe(Recipe $recipe, Request $request): Response
+    public function showRecipe(Recipe $recipe): Response
+    {
+        // $comment = new Comment();
+        // $form = $this->createForm(CommentFormType::class, $comment);
+        // $form->handleRequest($request);
+
+        // if ($form->isSubmitted() && $form->isValid()) {
+        //     if (!$this->isGranted('ROLE_USER')) {
+        //         return $this->redirectToRoute('app_visitor_blog_recipe_show', [
+        //             'id' => $recipe->getId(),
+        //             'slug' => $recipe->getSlug(),
+        //         ]);
+        //     }
+
+        //     /**
+        //      * @var User
+        //      */
+        //     $user = $this->getUser();
+
+        //     $comment->setPost($recipe);
+        //     $comment->setUser($user);
+        //     $comment->setIsActivated(true);
+        //     $comment->setCreatedAt(new \DateTimeImmutable());
+        //     $comment->setActivatedAt(new \DateTimeImmutable());
+
+        //     $this->entityManager->persist($comment);
+        //     $this->entityManager->flush();
+
+        //     return $this->redirectToRoute('app_visitor_blog_post_show.html.twig', [
+        //         'id' => $recipe->getId(),
+        //         'slug' => $recipe->getSlug(),
+        //     ]);
+        // }
+
+        return $this->render('pages/visitor/blog/show.html.twig', [
+            'recipe' => $recipe,
+            // 'commentForm' => $form->createView(),
         ]);
     }
 }
