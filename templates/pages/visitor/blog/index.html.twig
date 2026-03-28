@@ -40,8 +40,8 @@
 							{% if categories is not empty %}
 								{% for category in categories %}
 									<li>
-										{# <a class="dropdown-item" href="{{path('app_visitor_blog_filter_by_category', {'id':category.id, 'slug':category.slug})}}"> #}
-											{{category.name}} ({{category.recipes|length}} recette{{category.recipes|length > 1 ? 's' : ''}})
+										<a class="dropdown-item" href="{{path('app_visitor_blog_filter_by_category', {'id':category.id, 'slug':category.slug})}}">
+											{{category.name}} ({{category.recipes|filter(r => r.isPublished)|length}} recette{{category.recipes|length > 1 ? 's' : ''}})
 										</a>
 									</li>
 								{% endfor %}
@@ -61,8 +61,8 @@
 							{% if tags is not empty %}
 								{% for tag in tags %}
 									<li>
-										{# <a class="dropdown-item" href="{{path('app_visitor_blog_filter_by_tag', {'id':tag.id, 'slug':tag.slug})}}"> #}
-											{{tag.name}} ({{tag.recipes|length}} article{{tag.recipes|length > 1 ? 's' : ''}})
+										<a class="dropdown-item" href="{{path('app_visitor_blog_filter_by_tag', {'id':tag.id, 'slug':tag.slug})}}">
+											{{tag.name}} ({{tag.recipes|filter(r => r.isPublished)|length}} recette{{tag.recipes|length > 1 ? 's' : ''}})
 										</a>
 									</li>
 								{% endfor %}

@@ -16,6 +16,25 @@ class RecipeRepository extends ServiceEntityRepository
         parent::__construct($registry, Recipe::class);
     }
 
+    /**
+     * Cette méthode filtre les recettes en fonction du tag précisé.
+     *
+     * @return array<int, Recipe>
+     */
+    public function filterRecipesByTag(int $tag_id): array
+    {
+        return $this->createQueryBuilder('r')
+                    ->join('r.tags', 't')
+                    ->select('r')
+                    ->where('t.id = :id')
+                    ->andWhere('r.isPublished = :val')
+                    ->setParameter('id', $tag_id)
+                    ->setParameter('val', true)
+                    ->orderBy('r.publishedAt', 'DESC')
+                    ->getQuery()
+                    ->getResult();
+    }
+
     //    /**
     //     * @return Recipe[] Returns an array of Recipe objects
     //     */
