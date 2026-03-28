@@ -12,6 +12,12 @@
     recettes familiales, liste recettes, blog cuisine facile
 {% endblock %}
 
+{# pour la pagination #}
+{% block knp_paginator %}
+	{{ knp_pagination_rel_links(recipes) }}
+{% endblock %}
+
+
 {% block main %}
     {# <h1 class="text-center my-3 display-5">
         Toutes nos recettes simples et rapides
@@ -21,6 +27,92 @@
         🍴 Découvrez l'ensemble des recettes du blog : des idées faciles et gourmandes 
         pour cuisiner rapidement au quotidien.
     </p>
+
+     <div class="container my-5">
+			<div class="row text-center">
+				<div class="col-md-6">
+					<div class="dropdown my-2">
+						<a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Les catégories
+						</a>
+
+						<ul class="dropdown-menu">
+							{% if categories is not empty %}
+								{% for category in categories %}
+									<li>
+										{# <a class="dropdown-item" href="{{path('app_visitor_blog_filter_by_category', {'id':category.id, 'slug':category.slug})}}"> #}
+											{{category.name}} ({{category.recipes|length}} recette{{category.recipes|length > 1 ? 's' : ''}})
+										</a>
+									</li>
+								{% endfor %}
+							{% else %}
+								<li><a class="dropdown-item" href="#">Aucune catégorie</a></li>
+							{% endif %}
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="dropdown my-2">
+						<a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Les tags
+						</a>
+
+						<ul class="dropdown-menu">
+							{% if tags is not empty %}
+								{% for tag in tags %}
+									<li>
+										{# <a class="dropdown-item" href="{{path('app_visitor_blog_filter_by_tag', {'id':tag.id, 'slug':tag.slug})}}"> #}
+											{{tag.name}} ({{tag.recipes|length}} article{{tag.recipes|length > 1 ? 's' : ''}})
+										</a>
+									</li>
+								{% endfor %}
+							{% else %}
+								<li><a class="dropdown-item" href="#">Aucun Tag</a></li>
+							{% endif %}
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="container my-5">
+				<div class="row">
+					<div class="col-md-12 col-lg-8 mx-auto">
+						{% for recipe in recipes %}
+							<div class="card shadow my-5">
+								<div class="row g-0">
+									<div class="col-md-4">
+									 		{# <img  src="{{ vich_uploader_asset(recipe, 'imageFile') | imagine_filter('admin_recipe_thumb') }}" alt="{{ recipe.title }}"> #}
+										
+											<img class="w-100 h-100 rounded-start" src="{{ vich_uploader_asset(recipe, 'imageFile') | imagine_filter('visitor_recipe_thumb') }}" alt="{{ recipe.title }}">
+										
+									</div>
+									<div class="col-md-8">
+										<div class="card-body">
+											<h5 class="card-title">{{recipe.title|u.truncate('80', '...')}}</h5>
+											<p class="card-text">Catégorie: <span class="badge text-bg-info">{{recipe.category.name}}</span></p>
+											{% if recipe.tags is not empty %}
+											<p class="card-text">
+												Tags: 
+												{% for tag in recipe.tags %}
+													<span class="badge text-bg-secondary">{{tag.name}}</span>
+												{% endfor %}
+											</p>
+											{% endif %}
+											<p class="card-text"><small class="text-body-secondary">Publié {{recipe.publishedAt|ago}}</small></p>
+											<a href="" class="btn btn-primary shadow">Lire la recette</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+
+						{# display navigation #}
+						<div class="d-flex justify-content-center align-items-center">
+							{{ knp_pagination_render(recipes) }}
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
 {% endblock %}
 
 
