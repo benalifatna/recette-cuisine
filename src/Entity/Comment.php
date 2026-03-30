@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
@@ -22,6 +23,11 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[Assert\NotBlank(message: 'Le commentaire est obligatoire.')]
+    #[Assert\Length(
+        max: 1000,
+        maxMessage: 'Le commentaire de la catégorie ne doit pas dépasser {{ limit }} caractères.',
+    )]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 

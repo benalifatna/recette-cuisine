@@ -43,10 +43,10 @@
                 </div>
 
                 <hr>
-{#                <div>
-                    {% if app.user %} #}
+                <div>
+                    {% if app.user %} 
                         {# Form #}
-                        {# {{form_start(commentForm, {'action': path('app_visitor_blog_recipe_show', {'id':recipe.id, 'slug':recipe.slug})~'#comments-container'})}}
+                        {{form_start(commentForm, {'action': path('app_visitor_blog_recipe_show', {'id':recipe.id, 'slug':recipe.slug})~'#comments-container'})}}
                             <div class="mb-3">
                                 <label for="comment_form_content" class="h2">Laissez un commentaire</label>
                                 <div class="text-danger">{{form_errors(commentForm.content)}}</div>
@@ -66,6 +66,7 @@
                 <div id="comments-container">
                     {% if recipe.comments is not empty %}
                         <h2>Liste des commentaires</h2>
+                        {# reverse inverse l'ordre de l'affichage de la liste des commentaires #}
                         {% for comment in recipe.comments|reverse %}
                             {% if comment.isActivated %}
                                 <div class="shadow p-3 my-4 rounded">
@@ -80,7 +81,7 @@
                             {% endif %}
                         {% endfor %}
                     {% endif %}
-                </div> #}
+                </div> 
 
         
             </div>
