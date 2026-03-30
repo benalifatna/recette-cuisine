@@ -1,0 +1,91 @@
+{% extends 'themes/base_visitor.html.twig' %}
+
+{% block title %}{{recipe.title}}{% endblock %}
+
+{% block description %}{{recipe.description}}{% endblock %}
+
+{% block keywords %}
+    {% if recipe.keywords %}
+        <meta name="keywords" content="{{recipe.keywords}}">
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-lg-8 mx-auto my-5">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{path('app_visitor_blog_index')}}">Liste des recettes</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{recipe.title|u.truncate('60','...')}}</li>
+                    </ol>
+                </nav>
+
+                 <div class="text-center">
+                   
+                    <img class="img-fluid rounded" src="{{ vich_uploader_asset(recipe, 'imageFile') }}" alt="{{ recipe.title }}">
+                    
+                    <h1 class="my-3 display-6">{{recipe.title}}</h1>
+
+                    <small>Publié {{recipe.publishedAt|ago}} par
+                        {% if recipe.user %}
+                            <strong>{{recipe.user.firstName}} {{recipe.user.lastName}}</strong>
+                        {% else %}
+                            <strong>Sophie Lemoine</strong>
+                        {% endif %}
+                    </small>
+                </div>
+
+                <div class="my-5">
+                    {{recipe.content|raw}}
+                </div>
+
+                <hr>
+                <div>
+                    {% if app.user %} 
+                        {# Form #}
+                        {{form_start(commentForm, {'action': path('app_visitor_blog_recipe_show', {'id':recipe.id, 'slug':recipe.slug})~'#comments-container'})}}
+                            <div class="mb-3">
+                                <label for="comment_form_content" class="h2">Laissez un commentaire</label>
+                                <div class="text-danger">{{form_errors(commentForm.content)}}</div>
+                                {{form_widget(commentForm.content, {'attr': {'class':'form-control', 'rows':4}})}}
+                            </div>
+                            <div>
+                                <input formnovalidate type="submit" class="btn btn-primary shadow" value="Commenter">
+                            </div>
+                        {{form_end(commentForm)}}
+                    {% else %}
+                        <p><strong>Veuillez vous connecter afin de laisser un commentaire:</strong> <a href="{{path('app_login')}}" class="btn btn-lg btn-outline-primary">Se connecter</a></p>
+                    {% endif %}              
+                </div>
+                <hr>
+
+
+                <div id="comments-container">
+                    {% if recipe.comments is not empty %}
+                        <h2>Liste des commentaires</h2>
+                        {# reverse inverse l'ordre de l'affichage de la liste des commentaires #}
+                        {% for comment in recipe.comments|reverse %}
+                            {% if comment.isActivated %}
+                                <div class="shadow p-3 my-4 rounded">
+                                    <p>
+                                        <strong>{{comment.user.firstName}} {{comment.user.lastName}}</strong>
+                                        <small>Publié {{comment.createdAt|ago}}</small>                                
+                                    </p>
+                                    <div>
+                                        {{comment.content}}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div> 
+
+        
+            </div>
+        </div>
+    </div>  
+
+{% endblock %}
