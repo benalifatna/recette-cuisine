@@ -10,6 +10,12 @@
     {% endif %}
 {% endblock %}
 
+{% block font_awesome %}
+    {# Font Awesome pour les icones#}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+{% endblock %}
+
+
 {% block main %}
 
 
@@ -40,6 +46,18 @@
 
                 <div class="my-5">
                     {{recipe.content|raw}}
+
+                    <div class="mt-4">
+                        <a id="like-link" href="{{path('app_visitor_blog_recipe_like', {'id':recipe.id, 'slug':recipe.slug})}}" class="text-danger text-decoration-none">
+                            {% if app.user and recipe.isAlreadyLikedBy(app.user)%}
+                                <i class="fa-solid fa-heart"></i>
+                            {% else %}
+                                <i class="fa-regular fa-heart"></i>
+                            {% endif %}
+                        </a>
+                        <span id="total-likes-container">{{recipe.likes|length}}</span>
+                        <span>J'aime</span>
+                    </div>
                 </div>
 
                 <hr>
@@ -87,5 +105,41 @@
             </div>
         </div>
     </div>  
+{% endblock %}
 
+    {% block j_query %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {% endblock %}
+
+    {% block javascripts_added %}
+    <script>
+        $(document).ready(function(){
+            $('#like-link').on('click', function(event){
+                event.preventDefault();
+
+                $.ajax({
+                    url: this.href,
+                    type: 'GET',
+                    success: function(response) {
+                        $("#total-likes-container").html(response.totalLikesUpdated);
+
+                        if ( $('i').hasClass('fa-regular') ) {
+                            $('i').removeClass('fa-regular');
+                            $('i').addClass('fa-solid');
+                        } else {
+                            $('i').removeClass('fa-solid');
+                            $('i').addClass('fa-regular');
+                        }
+                    },
+                    error: function(response) {
+                        if (403 == response.status) {
+                            alert(response.responseJSON.message);
+                        } else {
+                            alert("Une erreur est survenue, veuillez réessayer plus tard.");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}
