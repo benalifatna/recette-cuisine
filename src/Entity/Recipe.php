@@ -114,12 +114,19 @@ class Recipe
     #[ORM\OneToMany(targetEntity: Like::class, mappedBy: 'recipe', orphanRemoval: true)]
     private Collection $likes;
 
+    /**
+     * @var Collection<int, Rating>
+     */
+    #[ORM\OneToMany(targetEntity: Rating::class, mappedBy: 'recipe', orphanRemoval: true)]
+    private Collection $ratings;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
         $this->ingredients = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->likes = new ArrayCollection();
+        $this->ratings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -429,5 +436,83 @@ class Recipe
         }
 
         return false;
+    }
+
+    /**
+     * @return Collection<int, Rating>
+     */
+    public function getRatings(): Collection
+    {
+        return $this->ratings;
+    }
+
+    public function addRating(Rating $rating): static
+    {
+        if (!$this->ratings->contains($rating)) {
+            $this->ratings->add($rating);
+            $rating->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRating(Rating $rating): static
+    {
+        if ($this->ratings->removeElement($rating)) {
+            // set the owning side to null (unless already changed)
+            if ($rating->getRecipe() === $this) {
+                $rating->setRecipe(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Vérifie si la recette a déjà été noté ou non.
+     */
+    public function isAlreadyRatingBy(User $user): bool
+    {
+        $ratings = $this->getRatings()->toArray();
+
+        // parcourir table des notes
+        foreach ($ratings as $rating) {
+            if ($user == $rating->getUser()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function getAverageRating(): float
+    {
+        if (0 === count($this->ratings)) {
+            return 0;
+        }
+
+        $total = 0;
+        foreach ($this->ratings as $rating) {
+            $total += $rating->getValue();
+        }
+
+        return $total / count($this->ratings);
+    }
+
+    // pour afficher la note
+
+    public function getUserRating(?User $user): ?int
+    {
+        if (!$user) {
+            return null;
+        }
+
+        foreach ($this->ratings as $rating) {
+            if ($rating->getUser() === $user) {
+                return $rating->getValue();
+            }
+        }
+
+        return null;
     }
 }

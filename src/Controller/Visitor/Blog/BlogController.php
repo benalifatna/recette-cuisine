@@ -5,12 +5,14 @@ namespace App\Controller\Visitor\Blog;
 use App\Entity\Category;
 use App\Entity\Comment;
 use App\Entity\Like;
+use App\Entity\Rating;
 use App\Entity\Recipe;
 use App\Entity\Tag;
 use App\Entity\User;
 use App\Form\CommentFormType;
 use App\Repository\CategoryRepository;
 use App\Repository\LikeRepository;
+use App\Repository\RatingRepository;
 use App\Repository\RecipeRepository;
 use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,6 +31,7 @@ final class BlogController extends AbstractController
         private readonly PaginatorInterface $paginator,
         private readonly EntityManagerInterface $entityManager,
         private readonly LikeRepository $likeRepository,
+        private readonly RatingRepository $ratingRepository,
     ) {
     }
 
@@ -158,6 +161,7 @@ final class BlogController extends AbstractController
             return $this->json([
                 'message' => "Vous avez retiré votre like de la recette {$recipe->getTitle()}",
                 'totalLikesUpdated' => $this->likeRepository->count(['recipe' => $recipe]),
+                'isLiked' => false,
             ]);
         }
         // Dans le cas contraire,
@@ -177,6 +181,55 @@ final class BlogController extends AbstractController
         return $this->json([
             'message' => "Vous avez liké la recette {$recipe->getTitle()}",
             'totalLikesUpdated' => $this->likeRepository->count(['recipe' => $recipe]),
+            'isLiked' => true,
         ]);
+    }
+
+    #[Route('/blog/recette/{id<\d+>}}/{slug}/noter/{value}', name: 'app_visitor_blog_recipe_rating', methods: ['GET'])]
+    public function ratingRecipe(Recipe $recipe, int $value): Response
+    {
+        /** @var User */
+        $user = $this->getUser();
+
+        // Si le visiteur n'est pas connecté, on envoie un fichier JSON, et message 403 erreur "accès refusé"
+        if (null == $user) {
+            return $this->json([
+                'message' => 'Veuillez vous connecter pour noter la recette',
+            ], Response::HTTP_FORBIDDEN);
+        }
+
+        $existingRating = $this->ratingRepository->findOneBy([
+            'recipe' => $recipe,
+            'user' => $user,
+        ]);
+        //  Si une note existe pour la recette émis par l'utilisateur, on met à jour la nouvelle note et la date de modification
+        if ($existingRating) {
+            $existingRating->setValue($value);
+            $existingRating->setUpdatedAt(new \DateTimeImmutable());
+        } else {
+            // Dans le cas contraire, Créer le nouveau like
+            $rating = new Rating();
+            // Initialiser ses propriétés
+            $rating->setUser($user);
+            $rating->setRecipe($recipe);
+            $rating->setValue($value);
+            $rating->setCreatedAt(new \DateTimeImmutable());
+
+            $this->entityManager->persist($rating);
+        }
+        // Le sauvegarder en base de données
+        $this->entityManager->flush();
+
+        // Retourner le message correspondant ainsi que le nombre de notes mis à jour moyenne
+        return $this->json([
+            'message' => 'Note enregistrée',
+            'userRating' => $value,
+            'average' => $this->ratingRepository->getAverageForRecipe($recipe),
+        ]);
+
+        //     return $this->redirectToRoute('app_visitor_blog_recipe_show', [
+        //         'id' => $recipe->getId(),
+        //         'slug' => $recipe->getSlug(),
+        //     ]);
     }
 }

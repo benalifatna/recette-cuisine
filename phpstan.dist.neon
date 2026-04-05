@@ -19,3 +19,4 @@ parameters:
         - '#Property App\\Entity\\Contact::\$id \(int\|null\) is never assigned int so it can be removed from the property type#'
         - '#Property App\\Entity\\Comment::\$id \(int\|null\) is never assigned int so it can be removed from the property type#'
         - '#Property App\\Entity\\Like::\$id \(int\|null\) is never assigned int so it can be removed from the property type#'
+        - '#Property App\\Entity\\Rating::\$id \(int\|null\) is never assigned int so it can be removed from the property type#'
