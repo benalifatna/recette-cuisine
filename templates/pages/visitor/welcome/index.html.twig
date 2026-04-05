@@ -13,12 +13,75 @@
 {% endblock %}
 
 {% block main %}
-    <h1 class="text-center my-3 display-5">
-        Recettes de cuisine simples et rapides pour tous les jours
-    </h1>
+    
+    <header class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 order-md-2 d-flex justify-content-center align-items-center">
+                    <img class="img-fluid" src="/images/statics/cheffe-sophie-lemoine.png" alt="Une image de bienvenue de Sophie Lemoine">
+                </div>
+                <div class="col-md-7 order-md-1 d-flex flex-column justify-content-ceb=nter align-items-center gap-5">
+                    <h1 class="mt-5 display-5">🍴 Bienvenue sur mon blog !</h1>
+                    <div>
+                        <p>Je suis Sophie Lemoine, passionnée de cuisine.</p>
+                        <p>Sur ce blog, je vous propose des recettes simples, rapides et gourmandes pour cuisiner facilement et faire plaisir à toute la famille.</p>
+                    </div>
+                    <a href="{{path('app_visitor_blog_index')}}" class="btn btn-lg btn-primary shadow">Liste des recettes</a>
+                </div>
+            </div>
+        </div>
+    </header>
 
-    <p class="text-center">
-        🍴 Bienvenue sur le blog de Sophie Lemoine ! 
-        Retrouvez des recettes faciles, rapides et gourmandes pour régaler toute la famille.
-    </p>
+     <section id="about-me" class="bg-light py-5">
+        <h2 class="text-center my-3 display-6">Qui suis-je?</h2>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <img class="img-fluid" src="/images/statics/family-meal.png" alt="A propos de moi">
+                </div>
+                <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+                    <p>Je suis Sophie Lemoine, maman de 4 enfants qui me posent chaque jour la fameuse question : "Qu'est-ce qu'on mange ?". C'est pour y répondre simplement que j'ai créé ce blog. Je vous propose des recettes faciles, rapides et gourmandes, accessibles à tous, et même idéales pour cuisiner avec vos enfants.</p>
+                    <p>Ici, chacun peut participer : les visiteurs connectés peuvent proposer leurs propres recettes, les noter, les liker et laisser des commentaires. Vous pouvez aussi trouver facilement l'inspiration en filtrant les recettes par catégorie (entrée, plat, dessert), par tag (rapide, économique) ou encore selon les ingrédients que vous avez déjà dans vos placards.</p>
+                    <p>L'objectif : cuisiner simplement, partager et se faire plaisir au quotidien !</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <h2 class="text-center my-3 display-6">Mes dernières recettes</h2>
+
+        <div class="container">
+            <div class="card-group gap-3">
+                {% for recipe in recipes %}
+                    <div class="card shadow">
+                        {% if recipe.image %}
+                            <img class="w-100 h-100 card-img-top" src="{{ vich_uploader_asset(recipe, 'imageFile') | imagine_filter('visitor_recipe_thumb') }}" alt="{{ recipe.title }}">
+                        {% endif %}
+                        <div class="card-body">
+                            {# limite la taille du titre à 80 puis "..." #}
+                            <h5 class="card-title">{{recipe.title|u.truncate('80','...')}}</h5>
+                            <p class="card-text"><strong>Categorie</strong>: <span class="badge text-bg-info">{{recipe.category.name}}</span></p>
+                            {% if recipe.tags is not empty %}
+                                <p class="card-text"><strong>Tags</strong>: 
+                                    {% for tag in recipe.tags %}
+                                        <span class="badge text-bg-secondary">{{tag.name}}</span> 
+                                    {% endfor %}
+                                </p>
+                            {% endif %}
+                            <p class="card-text">Publié <small class="text-body-secondary">{{recipe.publishedAt|ago}}</small></p>
+							<a href="{{path('app_visitor_blog_recipe_show', {'id':recipe.id, 'slug':recipe.slug})}}" class="btn btn-primary shadow">Lire la recette</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-light py-5">
+        <div class="container text-center">
+            <a href="{{path('app_visitor_contact_index')}}" class="btn btn-lg btn-primary shadow">Contactez-moi</a>
+        </div>
+    </section>
 {% endblock %}
