@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Rating;
+use App\Entity\Recipe;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -40,4 +41,14 @@ class RatingRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function getAverageForRecipe(Recipe $recipe): float
+    {
+        return (float) $this->createQueryBuilder('r')
+            ->select('AVG(r.value)')
+            ->where('r.recipe = :recipe')
+            ->setParameter('recipe', $recipe)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

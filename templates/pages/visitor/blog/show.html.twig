@@ -46,19 +46,62 @@
 
                 <div class="my-5">
                     {{recipe.content|raw}}
+                
+                    <div class="mt-4 d-flex align-items-center gap-4 flex-nowrap">
+                        <div class="d-flex align-items-center gap-2">
+                            <a id="like-link" href="{{path('app_visitor_blog_recipe_like', {'id':recipe.id, 'slug':recipe.slug})}}" class="text-danger text-decoration-none">
+                                {% if app.user and recipe.isAlreadyLikedBy(app.user)%}
+                                    <i class="fa-solid fa-heart"></i>
+                                {% else %}
+                                    <i class="fa-regular fa-heart"></i>
+                                {% endif %}
+                            </a>
+                            <span id="total-likes-container">{{recipe.likes|length}}</span>
+                            <span><strong>J'aime</strong></span>
+                        </div>
+         
+                    <div class="d-flex align-items-center gap-2">
+                        <span>Notez cette recette :</span>
 
-                    <div class="mt-4">
-                        <a id="like-link" href="{{path('app_visitor_blog_recipe_like', {'id':recipe.id, 'slug':recipe.slug})}}" class="text-danger text-decoration-none">
-                            {% if app.user and recipe.isAlreadyLikedBy(app.user)%}
-                                <i class="fa-solid fa-heart"></i>
-                            {% else %}
-                                <i class="fa-regular fa-heart"></i>
-                            {% endif %}
-                        </a>
-                        <span id="total-likes-container">{{recipe.likes|length}}</span>
-                        <span>J'aime</span>
+                            
+                            <div class="d-flex gap-1">
+
+                                {% set userRating = recipe.getUserRating(app.user) %}
+
+                                {% for i in 1..5 %}
+                                    <a href="{{ path('app_visitor_blog_recipe_rating', {
+                                        id: recipe.id,
+                                        slug: recipe.slug,
+                                        value: i
+                                    }) }}" class="rating-link text-warning text-decoration-none" data-value="{{ i }}">
+
+                                        {% if userRating is not null and i <= userRating|number_format %}
+                                            <i class="fa-solid fa-star"></i>
+                                        {% else %}
+                                            <i class="fa-regular fa-star"></i>
+                                        {% endif %}
+                                    </a>
+                                {% endfor %}
+
+                            </div>
+
+                                <span id="average-rating">
+                                    <strong>Moyenne :</strong>
+                                    {{ recipe.getAverageRating()|number_format(1) }}/5
+                                </span>
+
+                                {% if app.user %}
+                                    <span id="user-rating">
+                                        <strong>Votre note :</strong>
+                                        {{ userRating ?? 'Aucune' }}
+                                    </span>
+                                {% endif %}
+
+
+                    </div>
                     </div>
                 </div>
+            
 
                 <hr>
                 <div>
@@ -117,19 +160,22 @@
             $('#like-link').on('click', function(event){
                 event.preventDefault();
 
+                const link = $(this);           //  lien cliqué
+                const icon = link.find('i');    //  SON icône uniquement
+
+
                 $.ajax({
                     url: this.href,
                     type: 'GET',
                     success: function(response) {
                         $("#total-likes-container").html(response.totalLikesUpdated);
 
-                        if ( $('i').hasClass('fa-regular') ) {
-                            $('i').removeClass('fa-regular');
-                            $('i').addClass('fa-solid');
+                        if (response.isLiked) {
+                            icon.removeClass('fa-regular').addClass('fa-solid');
                         } else {
-                            $('i').removeClass('fa-solid');
-                            $('i').addClass('fa-regular');
+                            icon.removeClass('fa-solid').addClass('fa-regular');
                         }
+                        
                     },
                     error: function(response) {
                         if (403 == response.status) {
@@ -142,4 +188,56 @@
             });
         });
     </script>
+
+    {% block javascripts_added_rating %}
+    <script>
+        $(document).ready(function(){
+            $('.rating-link').on('click', function(event){
+                // ne pas recharger la page
+                event.preventDefault();
+
+                const link = $(this);
+                const value = link.data('value');
+
+// on envoie les informations dans fichier ajax sous forme de tableau
+
+                    $.ajax({
+                        url: link.attr('href'),
+                        type: 'GET',
+                        success: function(response) {
+
+                            // mettre à jour les icones étoiles
+                            $('.rating-link').each(function(){
+                                
+                                const starValue = $(this).data('value');
+                                const icon = $(this).find('i');
+
+                                if (starValue <= response.userRating) {
+                                    icon.removeClass('fa-regular').addClass('fa-solid');
+                                } else {
+                                    icon.removeClass('fa-solid').addClass('fa-regular');
+                                }
+                            });
+
+                            // mettre à jour la moyenne
+                            $('#average-rating').html('<strong>Moyenne :</strong> ' + response.average.toFixed(1) + '/5');
+
+                            // mettre à jour la note utilisateur
+                            $('#user-rating').html('<strong>Votre note :</strong> ' + response.userRating);
+                          
+                        },
+                    error: function(response) {
+                        if (403 == response.status) {
+                            alert(response.responseJSON.message);
+                        } else {
+                            alert("Une erreur est survenue, veuillez réessayer plus tard.");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+
+{% endblock %}
 {% endblock %}

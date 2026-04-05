@@ -467,4 +467,52 @@ class Recipe
 
         return $this;
     }
+
+    /**
+     * Vérifie si la recette a déjà été noté ou non.
+     */
+    public function isAlreadyRatingBy(User $user): bool
+    {
+        $ratings = $this->getRatings()->toArray();
+
+        // parcourir table des notes
+        foreach ($ratings as $rating) {
+            if ($user == $rating->getUser()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function getAverageRating(): float
+    {
+        if (0 === count($this->ratings)) {
+            return 0;
+        }
+
+        $total = 0;
+        foreach ($this->ratings as $rating) {
+            $total += $rating->getValue();
+        }
+
+        return $total / count($this->ratings);
+    }
+
+    // pour afficher la note
+
+    public function getUserRating(?User $user): ?int
+    {
+        if (!$user) {
+            return null;
+        }
+
+        foreach ($this->ratings as $rating) {
+            if ($rating->getUser() === $user) {
+                return $rating->getValue();
+            }
+        }
+
+        return null;
+    }
 }
