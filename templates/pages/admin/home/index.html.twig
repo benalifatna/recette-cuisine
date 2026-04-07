@@ -27,5 +27,91 @@ Gérez les recettes, les catégories et les utilisateurs depuis votre tableau de
             <li>👥 Administrer les comptes utilisateurs</li>
             <li>💬 Modérer les commentaires</li>
         </ul>
+
+        <div class="row mt-5">
+            <div class="col-md-3">
+                <div class="card border-primary mb-3">
+                    <div class="card-header">
+                    {# lien cliquable #}
+                        <a class="text-decoration-none text-dark" href="{{path('app_admin_category_index')}}">Les catégories</a>
+                    </div>
+                    <div class="card-body text-primary">
+                        <p class="card-text">{{categories_counted}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-secondary mb-3">
+                    <div class="card-header">
+                        <a class="text-decoration-none text-dark" href="{{path('app_admin_recipe_index')}}">Les recettes</a>
+                    </div>
+                    <div class="card-body text-primary">
+                        <p class="card-text">{{recipes_counted}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-info mb-3">
+                    <div class="card-header">
+                        <a class="text-decoration-none text-dark" href="{{path('app_admin_tag_index')}}">Les tags</a>
+                    </div>
+                    <div class="card-body text-primary">
+                        <p class="card-text">{{tags_counted}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-danger mb-3">
+                    <div class="card-header">
+                        <a class="text-decoration-none text-dark" href="{{path('app_admin_comment_index')}}">Les commentaires</a>
+                    </div>
+                    <div class="card-body text-primary">
+                        <p class="card-text">{{comments_counted}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card border-dark mb-3">
+                    <div class="card-header">
+                        <a class="text-decoration-none text-dark" href="{{path('app_admin_user_index')}}">Les utilisateurs</a>
+                    </div>
+                    <div class="card-body text-primary">
+                        <p class="card-text">{{users_counted}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-warning mb-3">
+                    <div class="card-header">
+                        <a class="text-decoration-none text-dark" href="{{path('app_admin_contact_index')}}">Les contacts</a>
+                    </div>
+                    <div class="card-body text-primary">
+                        <p class="card-text">{{contacts_counted}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-success mb-3">
+                    <div class="card-header">
+                        <a class="text-decoration-none text-dark" href="#">Les likes</a>
+                    </div>
+                    <div class="card-body text-primary">
+                        <p class="card-text">{{likes_counted}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-success mb-3">
+                    <div class="card-header">
+                        <a class="text-decoration-none text-dark" href="#">Les notes</a>
+                    </div>
+                    <div class="card-body text-primary">
+                        <p class="card-text">{{ratings_counted}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
