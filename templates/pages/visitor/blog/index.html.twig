@@ -20,19 +20,19 @@
 
 
 {% block main %}
-    {# <h1 class="text-center my-3 display-5">
-        Toutes nos recettes simples et rapides
-    </h1> #}
+   
     {% include 'components/visitor/_header_visitor.html.twig' with {'h1': "Toutes nos recettes simples et rapides"} %}
     <p class="text-center">
         🍴 Découvrez l'ensemble des recettes du blog : des idées faciles et gourmandes 
         pour cuisiner rapidement au quotidien.
     </p>
 
-     <div class="container my-5">
-			<div class="row text-center">
-				<div class="col-md-6">
-					<div class="dropdown my-2">
+    <div class="container my-5">
+     
+		<div class="row">
+			<div class="col-lg-8 mx-auto">
+				<div class="d-flex justify-content-between flex-wrap gap-3">
+					<div class="dropdown">
 						<a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							Les catégories
 						</a>
@@ -51,9 +51,8 @@
 							{% endif %}
 						</ul>
 					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="dropdown my-2">
+				
+					<div class="dropdown">
 						<a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							Les tags
 						</a>
@@ -72,8 +71,32 @@
 							{% endif %}
 						</ul>
 					</div>
+
+					<div class="dropdown">
+						<a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Les ingrédients
+						</a>
+
+						<ul class="dropdown-menu">
+							{% if ingredients is not empty %}
+								{% for ingredient in ingredients %}
+									<li>
+										<a class="dropdown-item" href="{{path('app_visitor_blog_filter_by_ingredient', {'id':ingredient.id, 'slug':ingredient.slug})}}">
+											{{ingredient.name}} ({{ingredient.recipes|filter(r => r.isPublished)|length}} recette{{ingredient.recipes|length > 1 ? 's' : ''}})
+										</a>
+									</li>
+								{% endfor %}
+							{% else %}
+								<li><a class="dropdown-item" href="#">Aucun Ingrédient</a></li>
+							{% endif %}
+						</ul>
+					</div>
+
 				</div>
 			</div>
+		</div>
+
+
 			<div class="container my-5">
 				<div class="row">
 					<div class="col-md-12 col-lg-8 mx-auto">
@@ -81,10 +104,7 @@
 							<div class="card shadow my-5">
 								<div class="row g-0">
 									<div class="col-md-4">
-									 		{# <img  src="{{ vich_uploader_asset(recipe, 'imageFile') | imagine_filter('admin_recipe_thumb') }}" alt="{{ recipe.title }}"> #}
-										
-											<img class="w-100 h-100 rounded-start" src="{{ vich_uploader_asset(recipe, 'imageFile') | imagine_filter('visitor_recipe_thumb') }}" alt="{{ recipe.title }}">
-										
+										<img class="w-100 h-100 rounded-start" src="{{ vich_uploader_asset(recipe, 'imageFile') | imagine_filter('visitor_recipe_thumb') }}" alt="{{ recipe.title }}">
 									</div>
 									<div class="col-md-8">
 										<div class="card-body">
@@ -113,7 +133,7 @@
 					</div>
 				</div>
 			</div>
-        </div>
+	</div>
 {% endblock %}
 
 
