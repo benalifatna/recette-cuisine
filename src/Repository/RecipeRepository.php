@@ -35,6 +35,25 @@ class RecipeRepository extends ServiceEntityRepository
                     ->getResult();
     }
 
+    /**
+     * Cette méthode filtre les recettes en fonction d'ingrédient précise.
+     *
+     * @return array<int, Recipe>
+     */
+    public function filterRecipesByIngredient(int $ingredient_id): array
+    {
+        return $this->createQueryBuilder('r')
+                    ->join('r.ingredients', 'i')
+                    ->select('r')
+                    ->where('i.id = :id')
+                    ->andWhere('r.isPublished = :val')
+                    ->setParameter('id', $ingredient_id)
+                    ->setParameter('val', true)
+                    ->orderBy('r.publishedAt', 'DESC')
+                    ->getQuery()
+                    ->getResult();
+    }
+
     //    /**
     //     * @return Recipe[] Returns an array of Recipe objects
     //     */

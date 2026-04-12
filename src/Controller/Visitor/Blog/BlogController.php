@@ -4,6 +4,7 @@ namespace App\Controller\Visitor\Blog;
 
 use App\Entity\Category;
 use App\Entity\Comment;
+use App\Entity\Ingredient;
 use App\Entity\Like;
 use App\Entity\Rating;
 use App\Entity\Recipe;
@@ -11,6 +12,7 @@ use App\Entity\Tag;
 use App\Entity\User;
 use App\Form\CommentFormType;
 use App\Repository\CategoryRepository;
+use App\Repository\IngredientRepository;
 use App\Repository\LikeRepository;
 use App\Repository\RatingRepository;
 use App\Repository\RecipeRepository;
@@ -28,6 +30,7 @@ final class BlogController extends AbstractController
         private readonly RecipeRepository $recipeRepository,
         private readonly CategoryRepository $categoryRepository,
         private readonly TagRepository $tagRepository,
+        private readonly IngredientRepository $ingredientRepository,
         private readonly PaginatorInterface $paginator,
         private readonly EntityManagerInterface $entityManager,
         private readonly LikeRepository $likeRepository,
@@ -40,6 +43,7 @@ final class BlogController extends AbstractController
     {
         $categories = $this->categoryRepository->findAll();
         $tags = $this->tagRepository->findAll();
+        $ingredients = $this->ingredientRepository->findAll();
         $query = $this->recipeRepository->findBy(['isPublished' => true], ['publishedAt' => 'DESC']);
 
         $recipes = $this->paginator->paginate(
@@ -51,6 +55,7 @@ final class BlogController extends AbstractController
         return $this->render('pages/visitor/blog/index.html.twig', [
             'categories' => $categories,
             'tags' => $tags,
+            'ingredients' => $ingredients,
             'recipes' => $recipes,
         ]);
     }
@@ -60,6 +65,7 @@ final class BlogController extends AbstractController
     {
         $categories = $this->categoryRepository->findAll();
         $tags = $this->tagRepository->findAll();
+        $ingredients = $this->ingredientRepository->findAll();
         $query = $this->recipeRepository->findBy(['category' => $category, 'isPublished' => true], ['publishedAt' => 'DESC']);
 
         $recipes = $this->paginator->paginate(
@@ -71,6 +77,7 @@ final class BlogController extends AbstractController
         return $this->render('pages/visitor/blog/index.html.twig', [
             'categories' => $categories,
             'tags' => $tags,
+            'ingredients' => $ingredients,
             'recipes' => $recipes,
         ]);
     }
@@ -80,6 +87,7 @@ final class BlogController extends AbstractController
     {
         $categories = $this->categoryRepository->findAll();
         $tags = $this->tagRepository->findAll();
+        $ingredients = $this->ingredientRepository->findAll();
         $query = $this->recipeRepository->filterRecipesByTag($tag->getId());
 
         $recipes = $this->paginator->paginate(
@@ -91,6 +99,30 @@ final class BlogController extends AbstractController
         return $this->render('pages/visitor/blog/index.html.twig', [
             'categories' => $categories,
             'tags' => $tags,
+            'ingredients' => $ingredients,
+            'recipes' => $recipes,
+        ]);
+    }
+    // $query = $this->recipeRepository->findBy(['ingredient' => $ingredient, 'isPublished' => true], ['publishedAt' => 'DESC']);
+
+    #[Route('/blog/recettes-filtre-par-ingredient/{id<\d+>}/{slug}', name: 'app_visitor_blog_filter_by_ingredient', methods: ['GET'])]
+    public function filterRecipesByIngredient(Ingredient $ingredient, Request $request): Response
+    {
+        $categories = $this->categoryRepository->findAll();
+        $tags = $this->tagRepository->findAll();
+        $ingredients = $this->ingredientRepository->findAll();
+        $query = $this->recipeRepository->filterRecipesByIngredient($ingredient->getId());
+
+        $recipes = $this->paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1), /* page number */
+            10 /* limit per page */
+        );
+
+        return $this->render('pages/visitor/blog/index.html.twig', [
+            'categories' => $categories,
+            'tags' => $tags,
+            'ingredients' => $ingredients,
             'recipes' => $recipes,
         ]);
     }
