@@ -60,7 +60,7 @@ final class RecipeController extends AbstractController
             $this->entityManager->persist($recipe);
             $this->entityManager->flush();
 
-            $this->addFlash('success', 'La recette a été ajouté avec succès.');
+            $this->addFlash('success', 'La recette a été ajoutée avec succès.');
 
             return $this->redirectToRoute('app_admin_recipe_index');
         }
@@ -96,7 +96,7 @@ final class RecipeController extends AbstractController
             $this->entityManager->persist($recipe);
             $this->entityManager->flush();
 
-            $this->addFlash('success', 'La recette a été modifié avec succès.');
+            $this->addFlash('success', 'La recette a été modifiée avec succès.');
 
             return $this->redirectToRoute('app_admin_recipe_index');
         }
@@ -114,7 +114,7 @@ final class RecipeController extends AbstractController
             $this->entityManager->remove($recipe);
             $this->entityManager->flush();
 
-            $this->addFlash('success', 'La recette a été supprimé');
+            $this->addFlash('success', 'La recette a été supprimée');
         }
 
         return $this->redirectToRoute('app_admin_recipe_index');
@@ -136,7 +136,7 @@ final class RecipeController extends AbstractController
             $recipe->setPublishedAt(new \DateTimeImmutable());
 
             // Générons le message flash correspondant
-            $this->addFlash('success', 'La recette a été publié.');
+            $this->addFlash('success', 'La recette a été publiée.');
         } else {
             // Dans le cas contraire,
 
@@ -147,7 +147,7 @@ final class RecipeController extends AbstractController
             $recipe->setPublishedAt(null);
 
             // Générons le message flash correspondant
-            $this->addFlash('success', 'La recette a été retiré de la liste des publications.');
+            $this->addFlash('success', 'La recette a été retirée de la liste des publications.');
         }
 
         // Demandons au manager des entités de sauvegarder les modifications apportées en base de données
