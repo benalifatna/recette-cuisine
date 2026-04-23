@@ -1,0 +1,8 @@
+User-agent: *
+
+Allow: /
+
+Disallow: /admin/
+Disallow: /user/
+
+Sitemap: https://www.example.com/sitemap.xml
