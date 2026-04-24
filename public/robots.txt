@@ -5,4 +5,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /user/
 
-Sitemap: https://www.example.com/sitemap.xml
+Sitemap: https://benalifatna.com/sitemap.xml
