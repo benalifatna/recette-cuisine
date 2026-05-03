@@ -80,22 +80,22 @@ Ajoutez une nouvelle recette pour organiser les recettes du blog
                                 {{ form_widget(recipeForm.description, {'attr': {'class':'form-control'}}) }}
                             </div>
                             <div class="mb-3">
-                                <label for="post_form_keywords">Mots clés</label>
+                                <label for="recipe_form_keywords">Mots clés</label>
                                 <div class="text-danger">{{form_errors(recipeForm.keywords)}}</div>
                                 {{form_widget(recipeForm.keywords, {'attr': {'class':'form-control'}})}}
                             </div>
                             <div class="mb-3">
-                                <label for="post_form_imageFile">Image <span class="text-danger">*</span></label>
+                                <label for="recipe_form_imageFile">Image <span class="text-danger">*</span></label>
                                 <div class="text-danger">{{form_errors(recipeForm.imageFile)}}</div>
                                 {{form_widget(recipeForm.imageFile, {'attr': {'class':'form-control'}})}}
                             </div>
                             <div class="mb-3">
-                                <label for="post_form_content">Contenu</label>
+                                <label for="recipe_form_content">Contenu</label>
                                 <div class="text-danger">{{form_errors(recipeForm.content)}}</div>
                                 {{form_widget(recipeForm.content, {'attr': {'class':'form-control', 'rows':10}})}}
                             </div>
                             <div>
-                                <input formnovalidate type="submit" class="btn btn-primary shadow" value="Enregistrer">
+                                <input formnovalidate type="submit" class="btn btn-primary text-white shadow" value="Enregistrer">
                             </div>
                         {{ form_end(recipeForm) }}
                     {# </div> #}

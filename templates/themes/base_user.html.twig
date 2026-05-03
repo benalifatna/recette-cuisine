@@ -81,8 +81,22 @@
        </main>
        
         {# Footer#}
-        <footer class="text-center">
-            <p>Sophie Lemoine</p>
+        <footer class="text-center py-4 border-top bg-light">
+
+            <div class="mb-2 d-flex justify-content-center gap-2">
+                <span>👩‍🍳 Recettes de cuisine facile</span>
+                <span> © {{ "now"|date("Y") }} - Sophie Lemoine</span>
+            </div>
+           
+            <p class="mb-0 small text-muted">
+                Fait avec ❤️ pour les gourmands
+            </p>
+
+            <p class="mb-0 small">
+                <a href="{{path('app_visitor_terms_of_service')}}" target="_blank">CGU</a> • 
+                <a href="{{path('app_visitor_mention_legal')}}" target="_blank">Mentions légales</a>
+            </p>
+
         </footer>
 
       

@@ -13,4 +13,5 @@ final class TermsOfServiceController extends AbstractController
     {
         return $this->render('pages/visitor/terms_of_service/index.html.twig');
     }
+
 }

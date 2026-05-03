@@ -20,6 +20,7 @@
 
 
 {% block main %}
+<div class="background-color-beige">
    
     {% include 'components/visitor/_header_visitor.html.twig' with {'h1': "Toutes nos recettes simples et rapides"} %}
     <p class="text-center">
@@ -27,7 +28,7 @@
         pour cuisiner rapidement au quotidien.
     </p>
 
-    <div class="container my-5">
+    <div class="container mt-5 mb-0">
      
 		<div class="row">
 			<div class="col-lg-8 mx-auto">
@@ -96,8 +97,8 @@
 			</div>
 		</div>
 
-
-			<div class="container my-5">
+			
+			<div class="container my-5 mt-5 mb-0">
 				<div class="row">
 					<div class="col-md-12 col-lg-8 mx-auto">
 						{% for recipe in recipes %}
@@ -134,6 +135,8 @@
 				</div>
 			</div>
 	</div>
+	</div>
+	
 {% endblock %}
 
 

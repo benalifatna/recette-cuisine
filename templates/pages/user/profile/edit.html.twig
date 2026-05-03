@@ -9,7 +9,8 @@ Ces informations sont utilisées pour gérer votre compte et administrer le blog
 
 
 {% block main %}
-    <h1 class="text-center my-3 display-5">Modification du profil</h1>
+<div class="background-color-beige">
+    <h1 class="text-center mb-3 display-5">Modification du profil</h1>
 
     <p class="text-center">
         Utilisez ce formulaire pour mettre à jour vos informations personnelles.
@@ -20,7 +21,7 @@ Ces informations sont utilisées pour gérer votre compte et administrer le blog
 
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-10 col-lg-5 mx-auto p-4 shadow">
+            <div class="col-md-10 col-lg-5 mx-auto p-4 bg-white shadow">
                 {{form_start(profileForm)}}
                     <div class="mb-3">
                         <label for="profile_form_firstName">Prénom</label>
@@ -38,7 +39,7 @@ Ces informations sont utilisées pour gérer votre compte et administrer le blog
                         {{form_widget(profileForm.email, {'attr': {'class':'form-control'}})}}
                     </div>
                     <div>
-                        <input formnovalidate type="submit" class="btn btn-primary shadow w-100" value="Modifier">
+                        <input formnovalidate type="submit" class="btn btn-primary text-white shadow w-100" value="Modifier">
                     </div>
                 {{form_end(profileForm)}}
             </div>
@@ -46,5 +47,6 @@ Ces informations sont utilisées pour gérer votre compte et administrer le blog
         </div>
     
     </div>
+</div>
 
 {% endblock %}

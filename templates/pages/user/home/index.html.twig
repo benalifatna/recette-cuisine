@@ -5,7 +5,9 @@
 {% block description %}Tableau de bord{% endblock %}
 
 {% block main %}
-    <h1 class="text-center my-3 display-5">Hello {{app.user.firstName}} {{app.user.lastName}}</h1>
+<div class="background-color-beige">
+
+    <h1 class="text-center mb-3 display-5">Hello {{app.user.firstName}} {{app.user.lastName}}</h1>
 
     <div class="container mt-5">
         <div class="row">
@@ -41,5 +43,5 @@
             </div>
         </div>
     </div>
-
+</div>
 {% endblock %}
