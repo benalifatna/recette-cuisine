@@ -9,7 +9,9 @@ et mot de passe afin de sécuriser l'accès à l'utilisateur du blog de recettes
 
 
 {% block main %}
-    <h1 class="text-center my-3 display-5">Mon profil</h1>
+<div class="background-color-beige">
+
+    <h1 class="text-center mb-3 display-5">Mon profil</h1>
 
     <p class="text-center">
         Cette page vous permet de consulter et modifier vos informations personnelles.
@@ -21,16 +23,8 @@ et mot de passe afin de sécuriser l'accès à l'utilisateur du blog de recettes
 
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-10 col-lg-5 mx-auto p-4 shadow">
-                {# <div>
-                    <p><strong>Prénom</strong>: {{admin.firstName}}</p>
-                    <p><strong>Nom</strong>: {{admin.lastName}}</p>
-                    <p><strong>Email</strong>: {{admin.email}}</p>
-                    <div>
-                        <a href="" class="btn btn-sm btn-secondary">Modifier mon profil</a>
-                        <a href="" class="btn btn-sm btn-dark">Modifier mon mot de passe</a>
-                    </div>
-                </div> #}
+            <div class="col-md-10 col-lg-5 mx-auto p-4 bg-white shadow">
+                
                 <div>
                     <p><strong>Prénom</strong>: {{app.user.firstName}}</p>
                     <p><strong>Nom</strong>: {{app.user.lastName}}</p>
@@ -45,5 +39,5 @@ et mot de passe afin de sécuriser l'accès à l'utilisateur du blog de recettes
         </div>
     
     </div>
-
+</div>
 {% endblock %}
